@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:InsertExpeditionData="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="inc/style.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="inc/jquery.js"></script>
+    <script>
+        $(document).ready(function(){
+
+            // hide #back-top first
+            $("#back-top").hide();
+
+            // fade in #back-top
+            $(function () {
+                $(window).scroll(function () {
+                    if ($(this).scrollTop() > 100) {
+                        $('#back-top').fadeIn();
+                    } else {
+                        $('#back-top').fadeOut();
+                    }
+                });
+
+                // scroll body to 0px on click
+                $('#back-top a').click(function () {
+                    $('body,html').animate({
+                        scrollTop: 0
+                    }, 800);
+                    return false;
+                });
+            });
+        });
+        $(function(){
+            // Check the initial Poistion of the Sticky Header
+            var stickyHeaderTop = $('#tableofcontents').offset().top;
+
+            $(window).scroll(function(){
+                if( $(window).scrollTop() > stickyHeaderTop ) {
+                    $('#tableofcontents').css({position: 'fixed', top: '0px', opacity: '0.8'});
+                } else {
+                    $('#tableofcontents').css({position: 'static', top: '0px', opacity: '1'});
+                }
+            });
+        });
+        $(function(){
+            var sticky = $('#tableofcontents').offset().top;
+            $('#tableofcontents').mouseover(function(){
+                $("#tableofcontents").css({opacity: '1'});
+            });
+            $('#tableofcontents').mouseleave(function(){
+                if($(window).scrollTop() > sticky) {
+                    $('#tableofcontents').css("opacity","0.8");
+                } else {
+                    $('#tableofcontents').css("opacity","1");
+                }
+            });
+        });
+    </script>
+    <title>Large Pelagic Database :: Help</title>
+</head>
+<body>
+<div id="tableofcontents">
+    <ul id="toclist">
+        <li><a href="#intro">Introduction</a></li>
+        <li><a href="#inserted">Insert Expedition Data</a></li>
+        <li><a href="#insertv">Insert Vessel</a></li>
+        <li><a href="#edit_vessel">Edit vessel production/gear</a></li>
+        <li><a href="#editd">Edit Data</a></li>
+        <li><a href="#analysis">View Analysis</a></li>
+        <li><a href="#newuser">Create New User</a></li>
+        <li><a href="#insertsd">Insert Static Data</a></li>
+        <li><a href="#userhistory">User History</a></li>
+        <li><a href="#editsd">Edit Static Data</a></li>
+        <li><a href="#newmod">Create New Moderator</a></li>
+        <li><a href="#backup">Back Up</a></li>
+    </ul>
+</div>
+<div id="container">
+    <h6>Large Pelagic Database [Help]</h6>
+    <h1 id="intro">Introduction</h1>
+    <p></p>
+    <h2 id="intro.1">Compatibility</h2>
+    <h3>Browser</h3>
+    <p>It is recommended to use Mozilla Firefox <a href="http://www.mozilla.org/en-US/firefox/new/" target="_blank"><img src="inc/link.png" border="0"/></a>
+    to view Large Pelagic Database. It is also compatible with Google Chrome <a href="www.google.com/chrome/‎" target="_blank"><img src="inc/link.png" border="0"/></a>
+        and Microsoft Internet Explorer <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie" target="_blank"><img src="inc/link.png" border="0" /></a>.
+        It is also recommended that you have updated these programs to their latest versions. </p>
+    <h1 id="inserted">Insert Expedition Data</h1>
+    <p><img src="inc/inserted.jpg" class="image" /> <h3>1. Vessel Information</h3>
+    <ol type="a">
+        <li><strong>AMAS search box</strong> is used to search through all inserted vessels. You may search by their AMAS or by their name. Any value left in this input field
+        won't be submitted to the expedition data as this field is used <em>ONLY for search!</em></li>
+        <li><strong>AMAS</strong> in this field you input the desired AMAS of the vessel you want to assign the expedition data to. If there are more than one vessels in the expedition
+        you add more fields by click on the "+" button!</li>
+        <li><strong>Number of vessels and "+" button</strong> are used to specify the number of vessels that are assigned to the expedition you are going to insert to the database.
+        The <em>number of vessels</em> field is automatically increased depending on how many times you click the "+" button. <br />
+            <b style="color:red">IMPORTANT!</b> If you add more input fields than the vessels you
+        want to insert into the expedition data you have to refresh the page as for security reasons we didn't add a "-" button to remove AMAS fields. So you are advised to use the "+" button carefully and
+            double-check how many vessels you want to add in each expedition data.</li>
+    </ol></p>
+    <p><h3>2. Expedition Data</h3>
+    Here you input the details of the expedition data. On the <em>Catch</em> section if you want to add more than one species, you click the respective "+" button
+    <em>(NOTE: if you fill the first input fields and then click the "+" button the Number and Weight fields will go to the next fields and the first ones will be empty!
+        So you have to double-check if the selected species and the inputted amounts are valid for each species!)</em></p>
+    <p><h3>3.Catch Measurements</h3>
+    First you have to select the species you want to add measument values for. As different species have different input fields! This is important because if you input
+    i.e. values for an Albacore and you haven't selected "Albacore" in "Select Species" dropdown menu, any values inputted in wrong fields will not be submitted and stored in the database!
+    </p>
+    <h1 id="insertv">Insert Vessel</h1>
+    <p>insert vessel</p>
+    <h1 id="edit_vessel">Edit vessel production/gear</h1>
+    <p></p>
+    <h1 id="editd">Edit Data</h1>
+    <p></p>
+    <h1 id="analysis">View Analysis</h1>
+    <p></p>
+    <h1 id="newuser">Create New User</h1>
+    <p></p>
+    <h1 id="insertsd">Insert Static Data</h1>
+    <p></p>
+    <h1 id="userhistory">User History</h1>
+    <p></p>
+    <h1 id="editsd">Edit Static Data</h1>
+    <p></p>
+    <h1 id="newmod">Create New Moderator</h1>
+    <p></p>
+    <h1 id="backup">Back Up</h1>
+    <p></p>
+    <div id="back-top">
+        <a href="#top"><img src="inc/bullet_arrow_top.png" /><br />Top</a>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $('.image').click(function() {
+        var width = $(this).width();
+        var parentWidth = $(this).offsetParent().width();
+        var width_per = 100*width/parentWidth;
+        if(width_per<=60){
+        $(this).animate({
+            height: "100%",
+            width: "100%"
+        }, 1000, function() {
+        });
+        } else {
+            $(this).animate({
+                height: "30%",
+                width: "30%"
+            }, 1000, function() {
+                });
+        }
+    });
+</script>
+</body>
+</html>
