@@ -11,7 +11,7 @@
 }
 @font-face {
 	font-family: NormalFont;
-	src: url(fonts/BPreplayItalics.otf)
+	src: url(fonts/BPreplayItalics.otf);
 	font-weight: normal;
 	font-style:italic;
 }
