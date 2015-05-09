@@ -301,8 +301,8 @@ if (isset($_SESSION['sess_username']) && isset($_SESSION['sess_privileges'])) {
             <td>
 				<select name="lightsticks">
   					<option value="">Select...</option>
-  					<option value="M">YES</option>
- 					 <option value="F">NO</option>
+  					<option value="1">YES</option>
+ 					 <option value="0">NO</option>
 				</select>
 			</td>
           </tr>
@@ -311,8 +311,8 @@ if (isset($_SESSION['sess_username']) && isset($_SESSION['sess_privileges'])) {
             <td>
 				<select name="infoorigin">
   					<option value="">Select...</option>
-  					<option value="M">OBS</option>
- 					<option value="F">LAN</option>
+  					<option value="OBS">OBS</option>
+ 					<option value="LAN">LAN</option>
 				</select>
 			</td>
           </tr>
