@@ -20,8 +20,20 @@ else {
 	}
 include ("dbcon.php");
 
+//Correcting empty dates
+if(empty($_POST['deploydate'])){
+    $deploydate = "0000-00-00";
+} else {
+    $deploydate=$_POST['deploydate'];
+}
+if(empty($_POST['returndate'])){
+    $returndate = "0000-00-00";
+} else {
+    $returndate = $_POST['returndate'];
+}
 /// Converting LATs and LONs
 //// Start/End LAT and LON
+
 $startlat= $_POST['startlatd'] + ($_POST['startlatm']/60) + ($_POST['startlats']/3600);
 if($_POST['startlatdir'] == "S"){ $startlat=$startlat*(-1); }
 $startlon= $_POST['startlond'] + ($_POST['startlonm']/60) + ($_POST['startlons']/3600);
@@ -53,7 +65,7 @@ if($comments=="comments")
 $amascounter=$_POST['amascounter'];
 if($amascounter==1){
     $sql ="INSERT INTO expedition VALUES
-    (NULL, '$_POST[deploydate]','$_POST[returndate]','$_POST[hooksday]',
+    (NULL, '$deploydate','$returndate','$_POST[hooksday]',
     '$_POST[fishingdays]','$_POST[effort]','$_POST[gear]',
     '$_POST[detailarea]','$_POST[startsettingtime]','$startlat',
     '$startlon','$_POST[endsettime]','$endlat',
@@ -261,7 +273,7 @@ if($amascounter==1){
 	
     }
 	  echo "<img src=\"img/tick.png\" width=\"25\" height=\"25\" /><strong>Expedition data stored succesfully!</strong> <p> You are redirected to homepage... </p><p> <i>if you aren't redirected <a href=\"index.php\">click here</a></i></p>";
-	header("refresh:3;url=inserted.php");
+	//header("refresh:3;url=inserted.php");
 }
 /*################################################*/
 /*          IF $amascounter>1                     */
@@ -485,7 +497,7 @@ else {
 
         }
         echo "<img src=\"img/tick.png\" width=\"25\" height=\"25\" /><strong>Expedition data stored succesfully!</strong> <p> You are redirected to homepage... </p><p> <i>if you aren't redirected <a href=\"index.php\">click here</a></i></p>";
-        header("refresh:3;url=inserted.php");
+        //header("refresh:3;url=inserted.php");
 
 }
 

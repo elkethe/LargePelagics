@@ -273,7 +273,7 @@ if (isset($_SESSION['sess_username']) && isset($_SESSION['sess_privileges'])) {
           </tr>
           <tr>
             <td>Fishing days:</td>
-            <td><input name="fishingdays" type="text" /></td>
+            <td><input name="fishingdays" type="number" /></td>
           </tr>
           <tr>
             <td>Effort:</td>
