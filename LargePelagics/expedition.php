@@ -58,7 +58,7 @@ if($amascounter==1){
     '$_POST[detailarea]','$_POST[startsettingtime]','$startlat',
     '$startlon','$_POST[endsettime]','$endlat',
     '$endlon','$_POST[starthaultime]','$startlathaul',
-    'startlonhaul','$_POST[endhaultime]','$endlathaul',
+    '$startlonhaul','$_POST[endhaultime]','$endlathaul',
     '$endlonhaul','$_POST[lightsticks]','$_POST[infoorigin]',
     '$comments')";
     if (!mysqli_query($con,$sql))
