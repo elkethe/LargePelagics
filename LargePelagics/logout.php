@@ -8,10 +8,10 @@
 <body><div id="redirect">
 <?php
 session_start();
-$mysqli = new mysqli('localhost', 'root', 'wtMGqJaF7DWgY', 'ELKETHE_DB');
+require_once 'dbcon.php';
 $username = $_SESSION['sess_username'];
 $updatedbq = "UPDATE users SET last_logout = NOW() WHERE username = '$username';";
-$updatedb = mysqli_query($mysqli, $updatedbq);
+$updatedb = mysqli_query($con, $updatedbq);
 unset($_SESSION['sess_username']);
 unset($_SESSION['sess_privileges']);
 if(isset($_SESSION['sess_privileges']) || isset($_SESSION['sess_username']))

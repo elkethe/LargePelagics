@@ -11,15 +11,14 @@ session_start();
 $username = $_POST['username'];
 $password = $_POST['password'];
  
-$mysqli = new mysqli('localhost', 'root', 'wtMGqJaF7DWgY', 'ELKETHE_DB');
- 
-$username = $mysqli->real_escape_string($username);
+require_once 'dbcon.php';
+
  
 $query = "SELECT password
         FROM users
         WHERE username = '$username';";
  
-$result = mysqli_query($mysqli, $query);
+$result = mysqli_query($con, $query);
  
 if($result->num_rows == 0) // User not found. So, redirect to login_form again.
 {
@@ -34,13 +33,13 @@ if($password != $passcheck['0']) // Incorrect password. So, redirect to login_fo
 	
 }else{ // Redirect to home page after successful login.
 	$query = "SELECT username, privileges FROM users WHERE username = '$username';";
-	$result = mysqli_query($mysqli, $query);
+	$result = mysqli_query($con, $query);
 	$forsession = mysqli_fetch_array($result);
 	session_regenerate_id();
 	$_SESSION['sess_username'] = $forsession['0'];
 	$_SESSION['sess_privileges'] = $forsession['1'];
 	$updatedbq = "UPDATE users SET last_login = NOW() WHERE username = '$username';";
-	$updatedb = mysqli_query($mysqli, $updatedbq);
+	$updatedb = mysqli_query($con, $updatedbq);
 	echo "<img src=\"img/login.png\" width=\"25\" height=\"25\" /><strong>Succesfully logged in as <i>" . $username . "</i></strong> <p> You are redirected to homepage... </p><p> <i>if you aren't redirected <a href=\"index.php\">click here</a></i></p>";
 	header("refresh:2;url=index.php");
 }
