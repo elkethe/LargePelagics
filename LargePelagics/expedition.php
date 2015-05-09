@@ -31,15 +31,15 @@ if(empty($_POST['returndate'])){
 } else {
     $returndate = $_POST['returndate'];
 }
-if(!empty($_POST['AMAS1'])){
-    echo '<br />';
-    echo $_POST['AMAS1'];
-    echo '<br />';
-} else {
-    echo var_dump($_POST['AMAS1']);
-    echo '<br />';
-    echo var_export($_POST['AMAS1']);
-}
+//if(!empty($_POST['AMAS1'])){
+//    echo '<br />';
+//    echo $_POST['AMAS1'];
+//    echo '<br />';
+//} else {
+//    echo var_dump($_POST['AMAS1']);
+//    echo '<br />';
+//    echo var_export($_POST['AMAS1']);
+//}
 /// Converting LATs and LONs
 //// Start/End LAT and LON
 $startlat= $_POST['startlatd'] + ($_POST['startlatm']/60) + ($_POST['startlats']/3600);
@@ -72,6 +72,7 @@ if($comments=="comments")
 }
 $amascounter=$_POST['amascounter'];
 if($amascounter==1){
+    $amas = $_POST['AMAS1'];
     $sql ="INSERT INTO expedition VALUES
     (NULL, '$deploydate','$returndate','$_POST[hooksday]',
     '$_POST[fishingdays]','$_POST[effort]','$_POST[gear]',
