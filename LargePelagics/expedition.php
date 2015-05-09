@@ -31,9 +31,17 @@ if(empty($_POST['returndate'])){
 } else {
     $returndate = $_POST['returndate'];
 }
+if(!empty($_POST['AMAS1'])){
+    echo '<br />';
+    echo $_POST['AMAS1'];
+    echo '<br />';
+} else {
+    echo var_dump($_POST['AMAS1']);
+    echo '<br />';
+    echo var_export($_POST['AMAS1']);
+}
 /// Converting LATs and LONs
 //// Start/End LAT and LON
-
 $startlat= $_POST['startlatd'] + ($_POST['startlatm']/60) + ($_POST['startlats']/3600);
 if($_POST['startlatdir'] == "S"){ $startlat=$startlat*(-1); }
 $startlon= $_POST['startlond'] + ($_POST['startlonm']/60) + ($_POST['startlons']/3600);
