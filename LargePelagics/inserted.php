@@ -248,9 +248,12 @@ if (isset($_SESSION['sess_username']) && isset($_SESSION['sess_privileges'])) {
                                 }
                             });
                         });
-                        $(document).click(function() {
+                        $(document).click(function(e) {
+                            var cont = $('#showamas');
+                            if(!cont.is(e.target) && cont.has(e.target).length === 0){
                             $('#showamas').hide("slow");
                             i = 0;
+                        }
                         });
                     </script>
 
