@@ -101,6 +101,7 @@ if($amascounter==1){
     for($i=1; $i<=$amascounter; $i++){
         echo "AMAS:".$amas."<br />";
         $vessel_expeditions="INSERT INTO vessel_expeditions VALUES ('$amas','$expedition_ID','$amascounter')";
+        echo '<b><p>' . $vessel_expeditions . '</p></b>';
         if(!mysqli_query($con, $vessel_expeditions)){
             echo '3Error: ' . mysqli_error($con);
         }
