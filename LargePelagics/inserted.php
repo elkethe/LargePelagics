@@ -217,7 +217,7 @@ if (isset($_SESSION['sess_username']) && isset($_SESSION['sess_privileges'])) {
                 if ($privcheck == "admin" || $privcheck == "moderator" || $privcheck == "user" && $usercheck != "" && $usercheck != NULL) {
                     echo '<h2 class="vesselheading">Vessel Information</h2>';
 
-                    echo '<form action="expedition.php" method="post" id="insertform" name="insertform">';
+                    echo '<form action="expedition_func.php" method="post" id="insertform" name="insertform">';
                     ?>
                     <div id="amassearch"><label for="searchbox">Search AMAS: </label>
                         <input type="text" id="searchbox" autocomplete="off" id="searchbox" name="searchv" /><sup style="color:#f00;"><em>This field is only for searching vessels! You should input the AMAS in the above fields!</em></sup></div>
@@ -396,10 +396,10 @@ if (isset($_SESSION['sess_username']) && isset($_SESSION['sess_privileges'])) {
                             <option value="n">No</option>
                         </select>
                         <input onClick="addRow(this.form);" type="button" style="float:right;" value="+" /> 
-                        <input name="speciescounter" type="hidden" value="0"/>
+                        <input name="speciescounter" type="hidden" value="1"/>
                     </div>
                     <script type="text/javascript">
-                        var rowNum = 0;
+                        var rowNum = 1;
                         var ddselc = '</select>';
                         var frm = document.getElementById('insertform');
 

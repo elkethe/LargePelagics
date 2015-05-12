@@ -58,13 +58,13 @@ if (!mysqli_query($con,$sql))
   {
   die($i . 'Error: ' . mysqli_error($con));
   }
+  $query = "DELETE FROM users_action_history WHERE action_size_expedition_ID = '$size_expedition_ID'";
+  if (!mysqli_query($con,$query))
+  {
+  die('Error: ' . mysqli_error($con));
+  }
 }
 }  
-  
-
-$query="INSERT INTO users_action_history (action_ID, action_username, action_size_expedition_ID, action_date)
-VALUES
-(NULL, '$usercheck', '$size_expedition_ID', NOW())";
 
 if (!mysqli_query($con,$query))
   {
@@ -73,7 +73,7 @@ if (!mysqli_query($con,$query))
   else
 {
   echo "<img src=\"img/tick.png\" width=\"25\" height=\"25\" /><strong>Expedition size data  changed succesfully!</strong> <p> You are redirected to homepage... </p><p> <i>if you aren't redirected <a href=\"index.php\">click here</a></i></p>";
-header("refresh:5;url=index.php");
+//header("refresh:5;url=index.php");
 } 
 
 
