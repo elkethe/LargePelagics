@@ -223,19 +223,20 @@ if (isset($_SESSION['sess_username']) && isset($_SESSION['sess_privileges'])) {
                         <input type="text" id="searchbox" autocomplete="off" id="searchbox" name="searchv" /><sup style="color:#f00;"><em>This field is only for searching vessels! You should input the AMAS in the above fields!</em></sup></div>
                     <div id="showamas"></div>
                     <div id="AMASRows">
-                        <p id="AMASrow_1"> AMAS: <input type="text" name="AMAS[]" size="10" class="amas"/><input onClick="addAMASRow(this.form);" type="button" style="float:right;" value="+" />
+                        <p id="AMASrow_1"> AMAS: <input type="text" name="AMAS[]" size="10" class="amas-1"/><span class="checker-1"></span>  <input onClick="addAMASRow(this.form);" type="button" style="float:right;" value="+" />
                             <label for="amascounter" style="float:right;" class="lblamascounter">Vessel </label><input id="amascounter" size="2" name="amascounter" type="text" value="1" readonly style="float:right;"/></p>
 
                     </div>
+                    <div id="checker"></div>
                     <script type="text/javascript">
                         var frm = document.getElementById('insertform');
                         var AMASRowNum = 1;
                         function addAMASRow(frm) {
                             AMASRowNum++;
-                            var AMASRow = '<p id="AMASrow_' + AMASRowNum + '"> AMAS: <input type="text" name="AMAS[]" size="10" class="amas" /><input onClick="removeAMASRow(' + AMASRowNum + ');" type="button" style="float:right;" value="-" />';
+                            var AMASRow = '<p id="AMASrow_' + AMASRowNum + '"> AMAS: <input type="text" name="AMAS[]" size="10" class="amas-'+AMASRowNum+'"/><span class="checker-'+AMASRowNum+'"></span><input onClick="removeAMASRow(' + AMASRowNum + ');" type="button" style="float:right;" value="-" />';
                             $('#AMASRows').append(AMASRow);
                             document.getElementsByName("amascounter")[0].value = AMASRowNum;
-                            
+
                         }
                         function removeAMASRow(rnum) {
                             $('#AMASrow_' + rnum).remove();
@@ -249,6 +250,19 @@ if (isset($_SESSION['sess_username']) && isset($_SESSION['sess_privileges'])) {
                                     $('#showamas').show("slow");
                                     i++;
                                 }
+                            });
+                        });
+
+                        $(function () {
+                            $(document).on('keyup', "input[class|='amas']", function (e) {
+                                var amas = $(this).val();
+                                var cls = $(this).attr("class");
+                                var split = cls.split("-");
+                                var rn = split[1];
+                                //alert(amas);
+                                $.post("checkamas.php", {checkamas:amas}, function (data) {
+                                    $(".checker-"+rn+"").html(data);
+                                });
                             });
                         });
 

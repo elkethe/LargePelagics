@@ -55,10 +55,10 @@ if (isset($_SESSION['sess_username']) && isset($_SESSION['sess_privileges'])) {
                     <h2>Edit user data</h2>
                     <h3>Your last entries:</h3>
 
-    <?php
-    require_once('dbcon.php');
-    if ($privcheck == "user" || $privcheck == "moderator" || $privcheck == "admin") {
-        $sql = "SELECT action_username, action_AMAS, action_vproduction_ID, action_pproduction_ID, action_eexpedition_ID, 
+                    <?php
+                    require_once('dbcon.php');
+                    if ($privcheck == "user" || $privcheck == "moderator" || $privcheck == "admin") {
+                        $sql = "SELECT action_username, action_AMAS, action_vproduction_ID, action_pproduction_ID, action_eexpedition_ID, 
 										action_size_expedition_ID, action_ALBmeasure, action_BFTmeasure, action_RVTmeasure, action_SWOmeasure, 
 										action_OTHERmeasure, action_date 
 										FROM users_action_history 
@@ -66,11 +66,11 @@ if (isset($_SESSION['sess_username']) && isset($_SESSION['sess_privileges'])) {
 												action_username LIKE '$usercheck' AND 
 												timestampdiff(day, users_action_history.action_date, now()) <= 2 ORDER BY action_date DESC";
 
-        $result = mysqli_query($con, $sql);
-        if (!$result) {
-            die('Error: ' . mysqli_error($con));
-        }
-        echo "<table id=\"results\">
+                        $result = mysqli_query($con, $sql);
+                        if (!$result) {
+                            die('Error: ' . mysqli_error($con));
+                        }
+                        echo "<table id=\"results\">
 						<tr>
 						<th>Username</th>
 						<th>AMAS</th>
@@ -84,57 +84,56 @@ if (isset($_SESSION['sess_username']) && isset($_SESSION['sess_privileges'])) {
 						<th>OTHER Measure</th>
 						<th>Date</th>
 						</tr>";
-        while ($row = mysqli_fetch_array($result)) 
-                {
-	echo "<tr>";
-	echo "<td>" . $row['action_username'] . "</td>";
-	echo "<td><a href=\"edit_vessel.php\">" . $row['action_AMAS'] . "</a></td>";
-        if(!empty($row['action_pproduction_ID'])){
-        echo '<td>'. $row['action_pproduction_ID'] .'-[<a href="edit_production.php?id=' . $row['action_pproduction_ID'] . '">Edit</a>] [<a href="production.php?action=delete&id=' . $row['action_pproduction_ID'] . '">Delete</a>]</td>';
-        } else {
-            echo '<td></td>';
-        }
-        if(!empty($row['action_eexpedition_ID'])){
-            echo '<td>' . $row['action_eexpedition_ID'] . '-[<a href="edit_exp.php?id=' . $row['action_eexpedition_ID'] . '">Edit</a>] [<a href="change_exp.php?action=delete&id=' . $row['action_eexpedition_ID'] . '">Delete</a>]</td>';
-        } else {
-            echo '<td></td>';
-        }        
-	echo '<td><a href="edit_expsize.php?id=' . $row['action_eexpedition_ID'] . '">' . $row['action_eexpedition_ID'] . '</td>';
-	if(!empty($row['action_ALBmeasure'])){
-        echo '<td>' . $row['action_ALBmeasure'] . ' [<a href="edit_alb.php?id=' . $row['action_ALBmeasure'] . '">Edit</a>] [<a href="deletemeasurement.php?id=' . $row['action_ALBmeasure'] . '&species=ALB">Delete</a>]</td>';
-        } else {
-            echo '<td></td>';
-        }
-	if(!empty($row['action_BFTmeasure'])){
-        echo '<td>' . $row['action_BFTmeasure'] . ' [<a href="edit_bft.php?id=' . $row['action_BFTmeasure'] . '">Edit</a>] [<a href="deletemeasurement.php?id=' . $row['action_BFTmeasure'] . '&species=BFT">Delete</a>]</td>';
-        } else {
-            echo '<td></td>';
-        }
-	if(!empty($row['action_RVTmeasure'])){
-        echo '<td>' . $row['action_RVTmeasure'] . ' [<a href="edit_rvt.php?id=' . $row['action_RVTmeasure'] . '">Edit</a>] [<a href="deletemeasurement.php?id=' . $row['action_RVTmeasure'] . '&species=RVT">Delete</a>]</td>';
-        } else {
-            echo '<td></td>';
-        }
-	if(!empty($row['action_SWOmeasure'])){
-        echo '<td>' . $row['action_SWOmeasure'] . ' [<a href="edit_swo.php?id=' . $row['action_SWOmeasure'] . '">Edit</a>] [<a href="deletemeasurement.php?id=' . $row['action_SWOmeasure'] . '&species=SWO">Delete</a>]</td>';
-        } else {
-            echo '<td></td>';
-        }
-	if(!empty($row['action_OTHERmeasure'])){
-        echo '<td>' . $row['action_OTHERmeasure'] . ' [<a href="edit_other.php?id=' . $row['action_OTHERmeasure'] . '">Edit</a>] [<a href="deletemeasurement.php?id=' . $row['action_OTHERmeasure'] . '&species=OTHER">Delete</a>]</td>';
-        } else {
-            echo '<td></td>';
-        }
-	
-	echo "<td>" . $row['action_date'] . "</td>";
-	echo "</tr>";
-}
-        echo "</table>";
-    }
-    if ($privcheck == "moderator" || $privcheck == "admin") {
+                        while ($row = mysqli_fetch_array($result)) {
+                            echo "<tr>";
+                            echo "<td>" . $row['action_username'] . "</td>";
+                            echo "<td><a href=\"edit_vessel.php\">" . $row['action_AMAS'] . "</a></td>";
+                            if (!empty($row['action_pproduction_ID'])) {
+                                echo '<td>' . $row['action_pproduction_ID'] . '-[<a href="edit_production.php?id=' . $row['action_pproduction_ID'] . '">Edit</a>] [<a href="production.php?action=delete&id=' . $row['action_pproduction_ID'] . '">Delete</a>]</td>';
+                            } else {
+                                echo '<td></td>';
+                            }
+                            if (!empty($row['action_eexpedition_ID'])) {
+                                echo '<td>' . $row['action_eexpedition_ID'] . '-[<a href="edit_exp.php?id=' . $row['action_eexpedition_ID'] . '">Edit</a>] [<a href="change_exp.php?action=delete&id=' . $row['action_eexpedition_ID'] . '">Delete</a>]</td>';
+                            } else {
+                                echo '<td></td>';
+                            }
+                            echo '<td><a href="edit_expsize.php?id=' . $row['action_eexpedition_ID'] . '">' . $row['action_eexpedition_ID'] . '</td>';
+                            if (!empty($row['action_ALBmeasure'])) {
+                                echo '<td>' . $row['action_ALBmeasure'] . ' [<a href="edit_alb.php?id=' . $row['action_ALBmeasure'] . '">Edit</a>] [<a href="deletemeasurement.php?id=' . $row['action_ALBmeasure'] . '&species=ALB">Delete</a>]</td>';
+                            } else {
+                                echo '<td></td>';
+                            }
+                            if (!empty($row['action_BFTmeasure'])) {
+                                echo '<td>' . $row['action_BFTmeasure'] . ' [<a href="edit_bft.php?id=' . $row['action_BFTmeasure'] . '">Edit</a>] [<a href="deletemeasurement.php?id=' . $row['action_BFTmeasure'] . '&species=BFT">Delete</a>]</td>';
+                            } else {
+                                echo '<td></td>';
+                            }
+                            if (!empty($row['action_RVTmeasure'])) {
+                                echo '<td>' . $row['action_RVTmeasure'] . ' [<a href="edit_rvt.php?id=' . $row['action_RVTmeasure'] . '">Edit</a>] [<a href="deletemeasurement.php?id=' . $row['action_RVTmeasure'] . '&species=RVT">Delete</a>]</td>';
+                            } else {
+                                echo '<td></td>';
+                            }
+                            if (!empty($row['action_SWOmeasure'])) {
+                                echo '<td>' . $row['action_SWOmeasure'] . ' [<a href="edit_swo.php?id=' . $row['action_SWOmeasure'] . '">Edit</a>] [<a href="deletemeasurement.php?id=' . $row['action_SWOmeasure'] . '&species=SWO">Delete</a>]</td>';
+                            } else {
+                                echo '<td></td>';
+                            }
+                            if (!empty($row['action_OTHERmeasure'])) {
+                                echo '<td>' . $row['action_OTHERmeasure'] . ' [<a href="edit_other.php?id=' . $row['action_OTHERmeasure'] . '">Edit</a>] [<a href="deletemeasurement.php?id=' . $row['action_OTHERmeasure'] . '&species=OTHER">Delete</a>]</td>';
+                            } else {
+                                echo '<td></td>';
+                            }
 
-        echo "<h2>Insert username or date to search history</h2>";
-        echo "<form id=\"searchform\" method=\"post\" onsubmit=\"return false;\">
+                            echo "<td>" . $row['action_date'] . "</td>";
+                            echo "</tr>";
+                        }
+                        echo "</table>";
+                    }
+                    if ($privcheck == "moderator" || $privcheck == "admin") {
+
+                        echo "<h2>Insert username or date to search history</h2>";
+                        echo "<form id=\"searchform\" method=\"post\" onsubmit=\"return false;\">
 						<input autocomplete=\"off\" id=\"searchbox\" name=\"searchv\" onkeyup=\"sendRequest()\" onclick=\"sendRequest()\" type=\"textbox\">
         				</form>
 						<div id=\"show_results\">
@@ -145,15 +144,15 @@ if (isset($_SESSION['sess_username']) && isset($_SESSION['sess_privileges'])) {
 							new Ajax.Updater('show_results', 'search_history.php', { method: 'post', parameters: $('searchform').serialize() });
 						}
          				</script>";
-    }
-    ?>
+                    }
+                    ?>
 
                 </div>
                 <?php
-                } else {
-                    echo "You have to login to see this page!";
-                }
-                ?>
+            } else {
+                echo "You have to login to see this page!";
+            }
+            ?>
             <div id="footer"><a href="help/index.html" target="_blank">HELP</a></div>
         </div>
 
