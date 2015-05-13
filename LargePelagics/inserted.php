@@ -144,11 +144,11 @@ if (isset($_SESSION['sess_username']) && isset($_SESSION['sess_privileges'])) {
                 }
             }
             //DatePicker:
-            $(function() {
+            $(function () {
                 var elem = document.createElement('input');
                 elem.setAttribute('type', 'date');
                 if (elem.type === 'text') {
-                    $('.date').each(function() {
+                    $('.date').each(function () {
                         $(this).datepicker({
                             dateFormat: 'yy-mm-dd'
                         });
@@ -156,11 +156,11 @@ if (isset($_SESSION['sess_username']) && isset($_SESSION['sess_privileges'])) {
                 }
             });
             //TimePicker:
-            $(function() {
+            $(function () {
                 var elem = document.createElement('input');
                 elem.setAttribute('type', 'time');
                 if (elem.type === 'text') {
-                    $('.time').each(function() {
+                    $('.time').each(function () {
                         $(this).timepicker({
                             timeFormat: 'HH:mm:ss'
                         });
@@ -223,24 +223,27 @@ if (isset($_SESSION['sess_username']) && isset($_SESSION['sess_privileges'])) {
                         <input type="text" id="searchbox" autocomplete="off" id="searchbox" name="searchv" /><sup style="color:#f00;"><em>This field is only for searching vessels! You should input the AMAS in the above fields!</em></sup></div>
                     <div id="showamas"></div>
                     <div id="AMASRows">
-                        <p id="rowAMASNum1"> AMAS(1): <input type="text" name="AMAS1" size="5" id="amas"/> <input onClick="addAMASRow(this.form);" type="button" style="float:right;" value="+" />
+                        <p id="AMASrow_1"> AMAS: <input type="text" name="AMAS[]" size="10" class="amas"/><input onClick="addAMASRow(this.form);" type="button" style="float:right;" value="+" />
                             <label for="amascounter" style="float:right;" class="lblamascounter">Vessel </label><input id="amascounter" size="2" name="amascounter" type="text" value="1" readonly style="float:right;"/></p>
 
                     </div>
                     <script type="text/javascript">
-                        var i = 0;
-                        var rowAMASNum = 2;
                         var frm = document.getElementById('insertform');
+                        var AMASRowNum = 1;
                         function addAMASRow(frm) {
-                            var AMASrow = '<p id="rowAMASNum' + rowAMASNum + '">AMAS(' + rowAMASNum + '): <input class="amas" type="text" name="AMAS' + rowAMASNum + '" size="5" /></p>';
-                            jQuery('#AMASRows').append(AMASrow);
-                            document.getElementsByName("amascounter")[0].value = rowAMASNum;
-                            rowAMASNum++;
-                            $(".vesselheading").html("Vessels Information");
-                            $(".lblamascounter").html("Vessels ");
+                            AMASRowNum++;
+                            var AMASRow = '<p id="AMASrow_' + AMASRowNum + '"> AMAS: <input type="text" name="AMAS[]" size="10" class="amas" /><input onClick="removeAMASRow(' + AMASRowNum + ');" type="button" style="float:right;" value="-" />';
+                            $('#AMASRows').append(AMASRow);
+                            document.getElementsByName("amascounter")[0].value = AMASRowNum;
+                            
                         }
-                        $('#searchbox').keyup(function() {
-                            $.post('getvessel.php', $("#searchbox").serialize(), function(data) {
+                        function removeAMASRow(rnum) {
+                            $('#AMASrow_' + rnum).remove();
+                            AMASRowNum--;
+                            document.getElementsByName("amascounter")[0].value = AMASRowNum;
+                        }
+                        $('#searchbox').keyup(function () {
+                            $.post('getvessel.php', $("#searchbox").serialize(), function (data) {
                                 $('#showamas').html(data);
                                 if (i == 0) {
                                     $('#showamas').show("slow");
@@ -248,12 +251,13 @@ if (isset($_SESSION['sess_username']) && isset($_SESSION['sess_privileges'])) {
                                 }
                             });
                         });
-                        $(document).click(function(e) {
+
+                        $(document).click(function (e) {
                             var cont = $('#showamas');
-                            if(!cont.is(e.target) && cont.has(e.target).length === 0){
-                            $('#showamas').hide("slow");
-                            i = 0;
-                        }
+                            if (!cont.is(e.target) && cont.has(e.target).length === 0) {
+                                $('#showamas').hide("slow");
+                                i = 0;
+                            }
                         });
                     </script>
 
@@ -378,7 +382,7 @@ if (isset($_SESSION['sess_username']) && isset($_SESSION['sess_privileges'])) {
 
                     <p style="text-align:center;"><b>Catch</b></p>
                     <div id="itemRows">
-                        <select name="species">
+                        <select name="species[]">
                             <option value="">Select Species</option>';
                             <?php
                             $sql = "SELECT common FROM species";
@@ -389,40 +393,41 @@ if (isset($_SESSION['sess_username']) && isset($_SESSION['sess_privileges'])) {
                             }
                             ?> 
                         </select> <br />
-                        Number: <input type="text" name="speciesnumber" size="4" /><br />
-                        Weight: <input type="text" name="speciesweight" size="4" /><br />
-                        Commercial: <select name="ccommercial"> 
+                        Number: <input type="number" name="speciesnumber[]" size="4" /><br />
+                        Weight: <input type="number" name="speciesweight[]" size="4" /><br />
+                        Commercial: <select name="commercial[]"> 
                             <option value="y">Yes</option>
                             <option value="n">No</option>
                         </select>
-                        <input onClick="addRow(this.form);" type="button" style="float:right;" value="+" /> 
+                        <input onClick="addRow(this.form);" style="float:right;" type="button" value="+" />
                         <input name="speciescounter" type="hidden" value="1"/>
                     </div>
                     <script type="text/javascript">
                         var rowNum = 1;
                         var ddselc = '</select>';
                         var frm = document.getElementById('insertform');
+                        var sum = 0;
 
                         function addRow(frm) {
-                            $.post("getlist.php", function(data) {
+                            $.post("getlist.php", function (data) {
                                 var ddopt = '<option value="">Select Species</option>';
-                                var ddsel = '<select name="species' + rowNum + '">';
+                                var ddsel = '<select name="species[]">';
                                 for (var i = 0; i < data.length; i++) {
                                     ddopt += '<option value="' + data[i].value + '">' + data[i].value + '</option>';
                                 }
-                                var row = '<p id="rowNum' + rowNum + '">' + ddsel + ddopt + ddselc + '<br />Number: <input type="text" name="speciesnumber' + rowNum + '" size="4" value=""><br /> Weight: <input type="text" name="speciesweight' + rowNum + '" value="" size="4"><br />Commercial: <select name="ccommercial'+rowNum+'"><option value="y">Yes</option><option value="n">No</option></select> <input type="button" style="float:right;" value="-" onclick="removeRow(' + rowNum + ');"></p>';
-                                jQuery('#itemRows').append(row);
-                                //frm.speciesnumber.value = "";
-                                //frm.speciesweight.value = "";
+                                var row = '<p id="rowNum' + rowNum + '">' + ddsel + ddopt + ddselc + '<br />Number: <input type="text" name="speciesnumber[]" size="4" value=""><br /> Weight: <input type="text" name="speciesweight[]" value="" size="4"><br />Commercial: <select name="commercial[]"><option value="y">Yes</option><option value="n">No</option></select> <input type="button" style="float:right;"value="-" onclick="removeRow(' + rowNum + ');"></p>';
+                                $('#itemRows').append(row);
                                 rowNum++;
                                 ddopt.length = 0;
                                 document.getElementsByName("speciescounter")[0].value = rowNum;
                             }, "json");
                         }
                         function removeRow(rnum) {
-                            jQuery('#rowNum' + rnum).remove();
+                            $('#rowNum' + rnum).remove();
+                            rowNum--;
+                            document.getElementsByName("speciescounter")[0].value = rowNum;
                         }
-                        $("#itemRows").keyup(function(event) {
+                        $("#itemRows").keyup(function (event) {
                             if (event.keyCode == 17) {
                                 addRow(this.form);
                             }
@@ -437,7 +442,8 @@ if (isset($_SESSION['sess_username']) && isset($_SESSION['sess_privileges'])) {
                     <h2>Catch Measurements</h2>
 
                     <div id="specMeasure">
-                        <p id="rowMeasureNum_0"><select name="speciesmeasure_0" onchange="changeFields(this);">
+                        <p id="rowMeasureNum_0">
+                            <select name="speciesmeasure[]" onchange="changeFields(this);">
                                 <option value="">Select Species</option>';
                                 <?php
                                 $sql = "SELECT common FROM species";
@@ -448,92 +454,92 @@ if (isset($_SESSION['sess_username']) && isset($_SESSION['sess_privileges'])) {
                                 }
                                 ?> 
                             </select>
-                            <label for="measurefl_0">FL:</label>
-                            <input type="text" name="measurefl_0" id="measurefl_0" size="4"/>
+                            <label for="measurefl[]">FL:</label>
+                            <input type="text" name="measurefl[]" id="measurefl_0" size="4"/>
                             <label for="measureljfl_0">LJFL:</label>
-                            <input type="text" name="measureljfl_0" size="4" id="measureljfl_0" />
+                            <input type="text" name="measureljfl[]" size="4" id="measureljfl_0" />
                             <label for="measuretl_0">TL:</label>
-                            <input type="text" name="measuretl_0" size="4" id="measuretl_0"/>
+                            <input type="text" name="measuretl[]" size="4" id="measuretl_0"/>
                             <label for="measurepffl_0">PFFL:</label>
-                            <input type="text" name="measurepffl_0" size="4" id="measurepffl_0" /> 
+                            <input type="text" name="measurepffl[]" size="4" id="measurepffl_0" /> 
                             <label for="measuregg_0">GG:</label>
-                            <input type="text" name="measuregg_0" size="4" id="measuregg_0" /> 
+                            <input type="text" name="measuregg[]" size="4" id="measuregg_0" /> 
                             <label for="measuredw_0">DW:</label>
-                            <input type="text" name="measuredw_0" size="4" id="measuredw_0" /> 
+                            <input type="text" name="measuredw[]" size="4" id="measuredw_0" /> 
                             <label for="measurerw_0">RW:</label>
-                            <input type="text" name="measurerw_0" size="4" id="measurerw_0" /> 
+                            <input type="text" name="measurerw[]" size="4" id="measurerw_0" /> 
                             <label for="measuresex_0">SEX:</label>
-                            <select name="measuresex_0" id="measuresex_0">
+                            <select name="measuresex[]" id="measuresex_0">
                                 <option value="Unknown">Unknown</option>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
                             </select> 
                             <label for="measurepfl_0">PFL:</label>
-                            <input type="text" name="measurepfl_0" size="4" id="measurepfl_0" />
+                            <input type="text" name="measurepfl[]" size="4" id="measurepfl_0" />
                             <label for="measurematur_stage_0">Mature Stage:</label>
-                            <input type="text" name="measurematur_stage_0" size="4" id="measurematur_stage_0" />
+                            <input type="text" name="measurematur_stage[]" size="4" id="measurematur_stage_0" />
                             <label for="measuregon_wei_0">GON weight:</label>
-                            <input type="text" name="measuregon_wei_0" size="4" id="measuregon_wei_0" />
+                            <input type="text" name="measuregon_wei[]" size="4" id="measuregon_wei_0" />
                             <label for="measurehead_length_0">Head Length:</label>
-                            <input type="text" name="measurehead_length_0" size="4" id="measurehead_length_0" />
+                            <input type="text" name="measurehead_length[]" size="4" id="measurehead_length_0" />
                             <label for="measureparasites_0">Parasites:</label>
-                            <input type="text" name="measureparasites_0" size="4" id="measureparasites_0" />
+                            <input type="text" name="measureparasites[]" size="4" id="measureparasites_0" />
                             <label for="measurelife_status_0">Life Status:</label>
-                            <input type="text" name="measurelife_status_0" size="4" id="measurelife_status_0" />
+                            <input type="text" name="measurelife_status[]" size="4" id="measurelife_status_0" />
                             <label for="measurebait_type_0">Bait Type:</label>
-                            <input type="text" name="measurebait_type_0" size="4" id="measurebait_type_0" />
+                            <input type="text" name="measurebait_type[]" size="4" id="measurebait_type_0" />
                             <label for="measurecommercial_0">Commercial:</label>
-                            <input type="text" name="measurecommercial_0" size="4" id="measurecommercial_0" />
+                            <input type="text" name="measurecommercial[]" size="4" id="measurecommercial_0" />
                             <input onClick="addMeasureRow(this.form);" type="button" style="float:right;" value="+" />
-                            <input name="speciesmeasurecounter" type="hidden" value="0"/></p><br />
+                            <input name="speciesmeasurecounter" type="hidden" value="1"/></p><br />
                     </div>
                     <script type="text/javascript">
                         var rowMeasureNum = 1;
                         var ddselc = '</select>';
                         var frm = document.getElementById('insertform');
                         function addMeasureRow(frm) {
-                            $.post("getlist.php", function(data) {
+                            $.post("getlist.php", function (data) {
                                 var ddopt = '<option value="">Select Species</option>';
-                                var ddsel = '<select name="speciesmeasure_' + rowMeasureNum + '" onchange="changeFields(this);">';
+                                var ddsel = '<select name="speciesmeasure[]" onchange="changeFields(this);">';
                                 for (var i = 0; i < data.length; i++) {
                                     ddopt += '<option value="' + data[i].value + '">' + data[i].value + '</option>';
                                 }
                                 var row = '<p id="rowMeasureNum_' + rowMeasureNum + '">' + ddsel + ddopt + ddselc + '<label for="measurefl_' + rowMeasureNum + '">FL:</label>\
-                        <input type="text" name="measurefl_' + rowMeasureNum + '" id="measurefl_' + rowMeasureNum + '" size="4"/>\
+                        <input type="text" name="measurefl[]" id="measurefl_' + rowMeasureNum + '" size="4"/>\
                  <label for="measureljfl_' + rowMeasureNum + '">LJFL:</label>\
-                        <input type="text" name="measureljfl_' + rowMeasureNum + '" size="4" id="measureljfl_' + rowMeasureNum + '" />\
+                        <input type="text" name="measureljfl[]" size="4" id="measureljfl_' + rowMeasureNum + '" />\
                  <label for="measuretl_' + rowMeasureNum + '">TL:</label>\
-                        <input type="text" name="measuretl_' + rowMeasureNum + '" size="4" id="measuretl_' + rowMeasureNum + '"/>\
+                        <input type="text" name="measuretl[]" size="4" id="measuretl_' + rowMeasureNum + '"/>\
                  <label for="measurepffl_' + rowMeasureNum + '">PFFL:</label>\
-                        <input type="text" name="measurepffl_' + rowMeasureNum + '" size="4" id="measurepffl_' + rowMeasureNum + '" /> \
+                        <input type="text" name="measurepffl[]" size="4" id="measurepffl_' + rowMeasureNum + '" /> \
                  <label for="measuregg_' + rowMeasureNum + '">GG:</label>\
-                        <input type="text" name="measuregg_' + rowMeasureNum + '" size="4" id="measuregg_' + rowMeasureNum + '" /> \
+                        <input type="text" name="measuregg[]" size="4" id="measuregg_' + rowMeasureNum + '" /> \
                  <label for="measuredw_' + rowMeasureNum + '">DW:</label>\
-                        <input type="text" name="measuredw_' + rowMeasureNum + '" size="4" id="measuredw_' + rowMeasureNum + '" /> \
+                        <input type="text" name="measuredw[]" size="4" id="measuredw_' + rowMeasureNum + '" /> \
                  <label for="measurerw_' + rowMeasureNum + '">RW:</label>\
-                        <input type="text" name="measurerw_' + rowMeasureNum + '" size="4" id="measurerw_' + rowMeasureNum + '" /> \
+                        <input type="text" name="measurerw[]" size="4" id="measurerw_' + rowMeasureNum + '" /> \
                  <label for="measuresex_' + rowMeasureNum + '">SEX:</label>\
-                 <select name="measuresex_' + rowMeasureNum + '" id="measuresex_' + rowMeasureNum + '">\
+                 <select name="measuresex[]" id="measuresex_' + rowMeasureNum + '">\
                         <option value="Unknown">Unknown</option>\
                         <option value="Male">Male</option>\
                         <option value="Female">Female</option>\
                  </select> \
                  <label for="measurepfl_' + rowMeasureNum + '">PFL:</label>\
-                        <input type="text" name="measurepfl_' + rowMeasureNum + '" size="4" id="measurepfl_' + rowMeasureNum + '" />\
+                        <input type="text" name="measurepfl[]" size="4" id="measurepfl_' + rowMeasureNum + '" />\
                  <label for="measurematur_stage_' + rowMeasureNum + '">Mature Stage:</label>\
-                        <input type="text" name="measurematur_stage_' + rowMeasureNum + '" size="4" id="measurematur_stage_' + rowMeasureNum + '" />\
+                        <input type="text" name="measurematur_stage[]" size="4" id="measurematur_stage_' + rowMeasureNum + '" />\
                  <label for="measuregon_wei_' + rowMeasureNum + '">GON weight:</label>\
-                        <input type="text" name="measuregon_wei_' + rowMeasureNum + '" size="4" id="measuregon_wei_' + rowMeasureNum + '" />\
+                        <input type="text" name="measuregon_wei[]" size="4" id="measuregon_wei_' + rowMeasureNum + '" />\
                  <label for="measurehead_length_' + rowMeasureNum + '">Head Length:</label>\
-                        <input type="text" name="measurehead_length_' + rowMeasureNum + '" size="4" id="measurehead_length_' + rowMeasureNum + '" />\
+                        <input type="text" name="measurehead_length[]" size="4" id="measurehead_length_' + rowMeasureNum + '" />\
                  <label for="measureparasites_' + rowMeasureNum + '">Parasites:</label>\
-                        <input type="text" name="measureparasites_' + rowMeasureNum + '" size="4" id="measureparasites_' + rowMeasureNum + '" />\
+                        <input type="text" name="measureparasites[]" size="4" id="measureparasites_' + rowMeasureNum + '" />\
                  <label for="measurelife_status_' + rowMeasureNum + '">Life Status:</label>\
-                        <input type="text" name="measurelife_status_' + rowMeasureNum + '" size="4" id="measurelife_status_' + rowMeasureNum + '" />\
+                        <input type="text" name="measurelife_status[]" size="4" id="measurelife_status_' + rowMeasureNum + '" />\
                  <label for="measurebait_type_' + rowMeasureNum + '">Bait Type:</label>\
-                        <input type="text" name="measurebait_type_' + rowMeasureNum + '" size="4" id="measurebait_type_' + rowMeasureNum + '" />\
+                        <input type="text" name="measurebait_type[]" size="4" id="measurebait_type_' + rowMeasureNum + '" />\
                  <label for="measurecommercial_' + rowMeasureNum + '">Commercial:</label>\
-                        <input type="text" name="measurecommercial_' + rowMeasureNum + '" size="4" id="measurecommercial_' + rowMeasureNum + '" /> <input type="button" style="float:right;" value="-" onclick="removeMeasureRow(' + rowMeasureNum + ');"></p><br />';
+                        <input type="text" name="measurecommercial[]" size="4" id="measurecommercial_' + rowMeasureNum + '" /> <input type="button" style="float:right;" value="-" onclick="removeMeasureRow(' + rowMeasureNum + ');"></p><br />';
                                 jQuery('#specMeasure').append(row);
                                 //frm.speciesnumber.value = '';
                                 //frm.speciesweight.value = '';
@@ -544,8 +550,10 @@ if (isset($_SESSION['sess_username']) && isset($_SESSION['sess_privileges'])) {
                         }
                         function removeMeasureRow(rnum) {
                             jQuery('#rowMeasureNum_' + rnum).remove();
+                            rowMeasureNum--;
+                            document.getElementsByName("speciesmeasurecounter")[0].value = rowMeasureNum;
                         }
-                        $("#specMeasure").keyup(function(event) {
+                        $("#specMeasure").keyup(function (event) {
                             if (event.keyCode == 17) {
                                 addMeasureRow(this.form);
                             }

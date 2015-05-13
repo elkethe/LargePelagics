@@ -21,111 +21,111 @@
             $ins_exp_query = expVars();
             $error = insertExpedition($con, $ins_exp_query);
             if ($error) {
-                die('Execution stopped!'.__LINE__);
+                die('Execution stopped!' . __LINE__);
             }
             $expid = mysqli_insert_id($con);
             $ins_uaction_query = userActionQuery($con, $usercheck, "expedition", $expid);
             $error = insertUsersAction($con, $ins_uaction_query);
             if ($error) {
-                die('Execution stopped!'.__LINE__);
+                die('Execution stopped!' . __LINE__);
             }
             $amascounter = (int) $_POST['amascounter'];
-            for ($i = 1; $i <= $amascounter; $i++) {
-                $amas = $_POST['AMAS' . $i];
-                $ins_vexp_query = vesselExpQuery($amas, $amascounter, $expid);
+            for ($i = 0; $i < $amascounter; $i++) {
+                $amas = $_POST['AMAS'];
+                $ins_vexp_query = vesselExpQuery($amas[$i], $amascounter, $expid);
                 $error = insertVExp($con, $ins_vexp_query);
                 if ($error) {
-                    die('Execution stopped!'.__LINE__);
+                    die('Execution stopped!' . __LINE__);
                 }
             }
             $spcounter = $_POST['speciescounter'];
-            for ($i = 1; $i <= $spcounter; $i++) {
+            for ($i = 0; $i < $spcounter; $i++) {
                 $exp_size_query = expSizeQuery($i, $expid);
                 $error = insertExpSize($con, $exp_size_query);
                 if ($error) {
-                    die('Execution stopped!'.__LINE__);
+                    die('Execution stopped!' . __LINE__);
                 }
             }
             $ins_uaction_query = userActionQuery($con, $usercheck, "expedition_size", $expid);
             $error = insertUsersAction($con, $ins_uaction_query);
             if ($error) {
-                die('Execution stopped!'.__LINE__);
+                die('Execution stopped!' . __LINE__);
             }
             $spmcounter = (int) $_POST['speciesmeasurecounter'];
-            for ($i = 0; $i <= $spmcounter; $i++) {
+            for ($i = 0; $i < $spmcounter; $i++) {
                 $ins_spmeasurement_query = spMeasurementQuery($i, $expid);
                 if ($ins_spmeasurement_query != NULL) {
                     $error = insertSpMeasurement($con, $ins_spmeasurement_query);
                     if ($error) {
-                        die('Execution stopped!'.__LINE__);
+                        die('Execution stopped!' . __LINE__);
                     }
                     $spmid = mysqli_insert_id($con);
-                    $speciesmeasure = $_POST['speciesmeasure_' . $i];
-                    switch ($speciesmeasure) {
+                    $speciesmeasure = $_POST['speciesmeasure'];
+                    switch ($speciesmeasure[$i]) {
                         case "Albacore":
                             $ins_alb_query = ALBQuery($i, $spmid);
                             $error = insertALBmeasure($con, $ins_alb_query);
                             if ($error) {
-                                die('Execution stopped!'.__LINE__);
+                                die('Execution stopped!' . __LINE__);
                             }
                             $uaction_query = userActionQuery($con, $usercheck, "albmeasure", $spmid);
                             $error = insertUsersAction($con, $uaction_query);
                             if ($error) {
-                                die('Execution stopped!'.__LINE__);
+                                die('Execution stopped!' . __LINE__);
                             }
                             break;
                         case "Bluefin tuna":
                             $ins_bft_query = BFTQuery($i, $spmid);
                             $error = insertBFTmeasure($con, $ins_bft_query);
                             if ($error) {
-                                die('Execution stopped!'.__LINE__);
+                                die('Execution stopped!' . __LINE__);
                             }
                             $uaction_query = userActionQuery($con, $usercheck, "bftmeasure", $spmid);
                             $error = insertUsersAction($con, $uaction_query);
                             if ($error) {
-                                die('Execution stopped!'.__LINE__);
+                                die('Execution stopped!' . __LINE__);
                             }
                             break;
                         case "Oilfish":
                             $ins_rvt_query = RVTQuery($i, $spmid);
                             $error = insertRVTmeasure($con, $ins_rvt_query);
                             if ($error) {
-                                die('Execution stopped!'.__LINE__);
+                                die('Execution stopped!' . __LINE__);
                             }
                             $uaction_query = userActionQuery($con, $usercheck, "rvtmeasure", $spmid);
                             $error = insertUsersAction($con, $uaction_query);
                             if ($error) {
-                                die('Execution stopped!'.__LINE__);
+                                die('Execution stopped!' . __LINE__);
                             }
                             break;
                         case "Swordfish":
                             $ins_swo_query = SWOQuery($i, $spmid);
                             $error = insertSWOmeasure($con, $ins_swo_query);
                             if ($error) {
-                                die('Execution stopped!'.__LINE__);
+                                die('Execution stopped!' . __LINE__);
                             }
                             $uaction_query = userActionQuery($con, $usercheck, "swomeasure", $spmid);
                             $error = insertUsersAction($con, $uaction_query);
                             if ($error) {
-                                die('Execution stopped!'.__LINE__);
+                                die('Execution stopped!' . __LINE__);
                             }
                             break;
                         default:
                             $ins_other_query = OTHERQuery($con, $i, $spmid);
                             $error = insertOTHERmeasure($con, $ins_other_query);
                             if ($error) {
-                                die('Execution stopped!'.__LINE__);
+                                die('Execution stopped!' . __LINE__);
                             }
                             $uaction_query = userActionQuery($con, $usercheck, "othermeasure", $spmid);
                             $error = insertUsersAction($con, $uaction_query);
                             if ($error) {
-                                die('Execution stopped!'.__LINE__);
+                                die('Execution stopped!' . __LINE__);
                             }
                             break;
                     }
                 }
             }
-            if($error){
+            if ($error) {
                 echo "<img src=\"img/xi.png\" width=\"25\" height=\"25\" /><strong>Error(s) occured check above messages!</strong>";
                 //header("refresh:3;url=inserted.php");
             } else {
@@ -149,24 +149,24 @@
             }
 
             function OTHERQuery($con, $im, $spmid) {
-                $speciesmeasure = mysqli_real_escape_string($con, $_POST['speciesmeasure_' . $im]);
+                $speciesmeasure = mysqli_real_escape_string($con, $_POST['speciesmeasure'][$im]);
                 $ssquery = "SELECT scientific FROM species WHERE common='$speciesmeasure'";
                 $resultsciq = mysqli_query($con, $ssquery);
                 $snamerow = mysqli_fetch_array($resultsciq);
                 $scientificname = $snamerow['scientific'];
-                
-                $fl = (double) $_POST['measurefl_' . $im];
-                $tl = (double) $_POST['measuretl_' . $im];
-                $gg = (double) $_POST['measuregg_' . $im];
-                $dw = (double) $_POST['measuredw_' . $im];
-                $rw = (double) $_POST['measurerw_' . $im];
-                $sex = $_POST['measuresex_' . $im];
-                $life_status = $_POST['measurelife_status_' . $im];
-                $bait_type = $_POST['measurebait_type_' . $im];
-                $commercial = $_POST['measurecommercial_' . $im];
+
+                $fl = $_POST['measurefl'];
+                $tl = $_POST['measuretl'];
+                $gg = $_POST['measuregg'];
+                $dw = $_POST['measuredw'];
+                $rw = $_POST['measurerw'];
+                $sex = $_POST['measuresex'];
+                $life_status = $_POST['measurelife_status'];
+                $bait_type = $_POST['measurebait_type'];
+                $commercial = $_POST['measurecommercial'];
                 $sql = "INSERT INTO OTHERmeasure VALUES ("
-                        . "$spmid,'$scientificname','$speciesmeasure',$fl,$tl,$gg,$dw,$rw,"
-                        . "'$sex','$life_status','$bait_type','$commercial');";
+                        . "$spmid,'$scientificname','$speciesmeasure',$fl[$im],$tl[$im],$gg[$im],$dw[$im],$rw[$im],"
+                        . "'$sex[$im]','$life_status[$im]','$bait_type[$im]','$commercial[$im]');";
                 return $sql;
             }
 
@@ -182,22 +182,22 @@
             }
 
             function SWOQuery($im, $spmid) {
-                $ljfl = (double) $_POST['measureljfl_' . $im];
-                $gg = (double) $_POST['measuregg_' . $im];
-                $sex = $_POST['measuresex_' . $im];
-                $rw = (double) $_POST['measurerw_' . $im];
-                $dw = (double) $_POST['measuredw_' . $im];
-                $pfl = (double) $_POST['measurepfl_' . $im];
-                $head_length = (double) $_POST['measurehead_length_' . $im];
-                $matur_stage = (int) $_POST['measurematur_stage_' . $im];
-                $gon_wei = (double) $_POST['measuregon_wei_' . $im];
-                $parasites = $_POST['measureparasites_' . $im];
-                $life_status = $_POST['measurelife_status_' . $im];
-                $bait_type = $_POST['measurebait_type_' . $im];
-                $commercial = $_POST['measurecommercial_' . $im];
+                $ljfl = $_POST['measureljfl'];
+                $gg = $_POST['measuregg'];
+                $sex = $_POST['measuresex'];
+                $rw = $_POST['measurerw'];
+                $dw = $_POST['measuredw'];
+                $pfl = $_POST['measurepfl'];
+                $head_length = $_POST['measurehead_length'];
+                $matur_stage = $_POST['measurematur_stage'];
+                $gon_wei = $_POST['measuregon_wei'];
+                $parasites = $_POST['measureparasites'];
+                $life_status = $_POST['measurelife_status'];
+                $bait_type = $_POST['measurebait_type'];
+                $commercial = $_POST['measurecommercial'];
                 $sql = "INSERT INTO SWOmeasure VALUES ("
-                        . "$spmid,$ljfl,$gg,'$sex',$rw,$dw,$pfl,$head_length,"
-                        . "$matur_stage,$gon_wei,'$parasites',$life_status','$bait_type','$commercial');";
+                        . "$spmid,$ljfl[$im],$gg[$im],'$sex[$im]',$rw[$im],$dw[$im],$pfl[$im],$head_length[$im],"
+                        . "$matur_stage[$im],$gon_wei[$im],'$parasites[$im]',$life_status[$im]','$bait_type[$im]','$commercial[$im]');";
                 return $sql;
             }
 
@@ -213,19 +213,19 @@
             }
 
             function RVTQuery($im, $spmid) {
-                $fl = (double) $_POST['measurefl_' . $im];
-                $tl = (double) $_POST['measuretl_' . $im];
-                $pffl = (double) $_POST['measurpffl_' . $im];
-                $gg = (double) $_POST['measuregg_' . $im];
-                $dw = (double) $_POST['measuredw_' . $im];
-                $rw = (double) $_POST['measurerw_' . $im];
-                $sex = $_POST['measuresex_' . $im];
-                $life_status = $_POST['measurelife_status_' . $im];
-                $bait_type = $_POST['measurebait_type_' . $im];
-                $commercial = $_POST['measurecommercial_' . $im];
+                $fl = $_POST['measurefl'];
+                $tl = $_POST['measuretl'];
+                $pffl = $_POST['measurpffl'];
+                $gg = $_POST['measuregg'];
+                $dw = $_POST['measuredw'];
+                $rw = $_POST['measurerw'];
+                $sex = $_POST['measuresex'];
+                $life_status = $_POST['measurelife_status'];
+                $bait_type = $_POST['measurebait_type'];
+                $commercial = $_POST['measurecommercial'];
                 $sql = "INSERT INTO RVTmeasure VALUES ("
-                        . "$spmid,$fl,$tl,$pffl,$dw,$rw,'$sex',"
-                        . "'$life_status','$bait_type','$commercial');";
+                        . "$spmid,$fl[$im],$tl[$im],$pffl[$im],$dw[$im],$rw[$im],'$sex[$im]',"
+                        . "'$life_status[$im]','$bait_type[$im]','$commercial[$im]');";
                 return $sql;
             }
 
@@ -241,20 +241,20 @@
             }
 
             function BFTQuery($im, $spmid) {
-                $fl = (double) $_POST['measurefl_' . $im];
-                $gg = (double) $_POST['measuregg_' . $im];
-                $dw = (double) $_POST['measuredw_' . $im];
-                $rw = (double) $_POST['measurerw_' . $im];
-                $sex = $_POST['measuresex_' . $im];
-                $pfl = (double) $_POST['measurepfl_' . $im];
-                $matur_stage = (int) $_POST['measurematur_stage_' . $im];
-                $gon_wei = (double) $_POST['measuregon_wei_' . $im];
-                $life_status = $_POST['measurelife_status_' . $im];
-                $bait_type = $_POST['measurebait_type_' . $im];
-                $commercial = $_POST['measurecommercial_' . $im];
+                $fl = $_POST['measurefl'];
+                $gg = $_POST['measuregg'];
+                $dw = $_POST['measuredw'];
+                $rw = $_POST['measurerw'];
+                $sex = $_POST['measuresex'];
+                $pfl = $_POST['measurepfl'];
+                $matur_stage = $_POST['measurematur_stage'];
+                $gon_wei = $_POST['measuregon_wei'];
+                $life_status = $_POST['measurelife_status'];
+                $bait_type = $_POST['measurebait_type'];
+                $commercial = $_POST['measurecommercial'];
                 $sql = "INSERT INTO BFTmeasure VALUES ("
-                        . "$spmid,$fl,$gg,$dw,$rw,'$sex',$pfl,$matur_stage,$gon_wei,"
-                        . "'$life_status','$bait_type','$commercial');";
+                        . "$spmid,$fl[$im],$gg[$im],$dw[$im],$rw[$im],'$sex[$im]',$pfl[$im],$matur_stage[$im],$gon_wei[$im],"
+                        . "'$life_status[$im]','$bait_type[$im]','$commercial[$im]');";
                 return $sql;
             }
 
@@ -270,19 +270,19 @@
             }
 
             function ALBQuery($im, $spmid) {
-                $fl = (double) $_POST['measurefl_' . $im];
-                $gg = (double) $_POST['measuregg_' . $im];
-                $dw = (double) $_POST['measuredw_' . $im];
-                $rw = (double) $_POST['measurerw_' . $im];
-                $sex = $_POST['measuresex_' . $im];
-                $matur_stage = (int) $_POST['measurematur_stage_' . $im];
-                $gon_wei = (double) $_POST['measuregon_wei_' . $im];
-                $life_status = $_POST['measurelife_status_' . $im];
-                $bait_type = $_POST['measurebait_type_' . $im];
-                $commercial = $_POST['measurecommercial_' . $im];
+                $fl = $_POST['measurefl'];
+                $gg = $_POST['measuregg'];
+                $dw = $_POST['measuredw'];
+                $rw = $_POST['measurerw'];
+                $sex = $_POST['measuresex'];
+                $matur_stage = $_POST['measurematur_stage'];
+                $gon_wei = $_POST['measuregon_wei'];
+                $life_status = $_POST['measurelife_status'];
+                $bait_type = $_POST['measurebait_type'];
+                $commercial = $_POST['measurecommercial'];
                 $sql = "INSERT INTO ALBmeasure VALUES ("
-                        . "$spmid,$fl,$gg,$dw,$rw,'$sex',$matur_stage,$gon_wei,'$life_status',"
-                        . "'$bait_type','$commercial');";
+                        . "$spmid,$fl[$im],$gg[$im],$dw[$im],$rw[$im],'$sex[$im]',$matur_stage[$im],$gon_wei[$im],'$life_status[$im]',"
+                        . "'$bait_type[$im]','$commercial[$im]');";
                 return $sql;
             }
 
@@ -298,12 +298,12 @@
             }
 
             function spMeasurementQuery($counter, $id) {
-                $speciesmeasure = $_POST['speciesmeasure_' . $counter];
-                if ($speciesmeasure == NULL || $speciesmeasure == "") {
+                $speciesmeasure = $_POST['speciesmeasure'];
+                if ($speciesmeasure[$counter] == NULL || $speciesmeasure[$counter] == "") {
                     return NULL;
                 } else {
                     $sql = "INSERT INTO species_measurements VALUES ("
-                            . "$id,'$speciesmeasure',NULL);";
+                            . "$id,'$speciesmeasure[$counter]',NULL);";
                     return $sql;
                 }
             }
@@ -320,23 +320,13 @@
             }
 
             function expSizeQuery($counter, $id) {
-                if ($counter == 1) {
-                    $spweight = (double) $_POST['speciesweight'];
-                    $spnumber = (int) $_POST['speciesnumber'];
-                    $species = $_POST['species'];
-                    $commercial = $_POST['commercial'];
-                    $sql = "INSERT INTO expedition_size VALUES ("
-                            . "$spweight,$spnumber,'$species',$id,'$commercial');";
-                    return $sql;
-                } else {
-                    $spweight = (double) $_POST['speciesweight' . $counter];
-                    $spnumber = (int) $_POST['speciesnumber' . $counter];
-                    $species = $_POST['species' . $counter];
-                    $commercial = $_POST['commercial' . $counter];
-                    $sql = "INSERT INTO expedition_size VALUES ("
-                            . "$spweight,$spnumber,'$species',$id,'$commercial');";
-                    return $sql;
-                }
+                $spweight = $_POST['speciesweight'];
+                $spnumber = $_POST['speciesnumber'];
+                $species = $_POST['species'];
+                $commercial = $_POST['commercial'];
+                $sql = "INSERT INTO expedition_size VALUES ("
+                        . "$spweight[$counter],$spnumber[$counter],'$species[$counter]',$id,'$commercial[$counter]');";
+                return $sql;
             }
 
             function insertVExp($con, $query) {
@@ -387,7 +377,7 @@
                                 . " VALUES (NULL, '$user', $id, NOW());";
                         break;
                     default:
-                        echo '<br /><b>Wrong case to update user_action_history: <u>' .$selcase.'</u></b><br />';
+                        echo '<br /><b>Wrong case to update user_action_history: <u>' . $selcase . '</u></b><br />';
                         break;
                 }
 
@@ -487,6 +477,7 @@
                         . "$lightsticks,'$infoorigin','$comments');";
                 return $sql;
             }
+
             mysqli_close($con);
             ?>
         </div>
