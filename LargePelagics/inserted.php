@@ -184,15 +184,15 @@ if (isset($_SESSION['sess_username']) && isset($_SESSION['sess_privileges'])) {
                     return false;
                 }
             }
-            function checkamas() {
-                var amasnumber = document.forms["insertform"]["amascounter"].value;
-                var fcounter = 1;
-                for (fcounter = 1; fcounter <= amasnumber; fcounter++) {
-                    var amasvalue = document.forms["insertform"]["AMAS" + fcounter].value;
-                    alert("To value tou " + AMAS + fcounter + " einai" + amasvalue);
-                    return false;
-                }
-            }
+//            function checkamas() {
+//                var amasnumber = document.forms["insertform"]["amascounter"].value;
+//                var fcounter = 1;
+//                for (fcounter = 1; fcounter <= amasnumber; fcounter++) {
+//                    var amasvalue = document.forms["insertform"]["AMAS["].value;
+//                    alert("To value tou " + AMAS + fcounter + " einai" + amasvalue);
+//                    return false;
+//                }
+//            }
         </script>
 
     </head>
@@ -585,19 +585,19 @@ if (isset($_SESSION['sess_username']) && isset($_SESSION['sess_privileges'])) {
                 }
                 ?>
                 <script>
-                    function checkamas() {
-                        var amasnumber = document.forms["insertform"]["amascounter"].value;
-                        var fcounter = 1;
-                        for (fcounter = 1; fcounter <= amasnumber; fcounter++) {
-                            var amasvalue = document.forms["insertform"]["AMAS" + fcounter].value;
-                            if (amasvalue == "") {
-                                alert("Value of AMAS(" + fcounter + ") is empty! \n You must fill all AMAS inputs!");
-                                return false;
-                            } else {
-                                return true;
-                            }
-                        }
-                    }
+//                    function checkamas() {
+//                        var amasnumber = document.forms["insertform"]["amascounter"].value;
+//                        var fcounter = 1;
+//                        for (fcounter = 1; fcounter <= amasnumber; fcounter++) {
+//                            var amasvalue = document.forms["insertform"]["AMAS" + fcounter].value;
+//                            if (amasvalue == "") {
+//                                alert("Value of AMAS(" + fcounter + ") is empty! \n You must fill all AMAS inputs!");
+//                                return false;
+//                            } else {
+//                                return true;
+//                            }
+//                        }
+//                    }
                 </script>
 
             </div>
