@@ -26,6 +26,11 @@
                 </div>
                 <?php
                 //require_once("menu.php");
+                $test=NULL;
+                addslashes($test);
+                echo var_dump($test);
+                echo '<b>TEST:'.$test.'|</b><br />';
+                echo '<b>TEST(int):'.(int)$test.'|</b><br />';
                 ?>
                 <form action="test2.php" method="post" id="insertform" name="insertform">
                     <!--                    <div id="itemRows">

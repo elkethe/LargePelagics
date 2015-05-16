@@ -132,8 +132,8 @@
                 echo "<img src=\"img/xi.png\" width=\"25\" height=\"25\" /><strong>Error(s) occured check above messages!</strong>";
                 //header("refresh:3;url=inserted.php");
             } else {
-                echo "<img src=\"img/tick.png\" width=\"25\" height=\"25\" /><strong>Expedition data stored succesfully!</strong> <p> You are redirected to homepage... </p><p> <i>if you aren't redirected <a href=\"index.php\">click here</a></i></p>";
-                //header("refresh:3;url=inserted.php");
+                echo "<img src=\"img/tick.png\" width=\"25\" height=\"25\" /><strong>Expedition data stored succesfully!</strong> <p> You are redirected back... </p><p> <i>if you aren't redirected <a href=\"inserted.php\">click here</a></i></p>";
+                header("refresh:3;url=inserted.php");
             }
 
             ###########################################

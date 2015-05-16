@@ -20,7 +20,7 @@ else {
 	}
 require_once('dbcon.php');
 
-$sql="UPDATE ALBmeasure 
+$sql="UPDATE BFTmeasure 
 		SET 
 		BFT_measure_ID = '$_POST[BFT_measure_ID]',
 		fl = '$_POST[fl]', 

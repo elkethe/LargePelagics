@@ -237,6 +237,10 @@ ul#nav li a:hover {
     background-color: #fff;
     border: 1px solid #ccc;
 }
+#button:disabled {
+    background-color:red;
+    color: black;
+}
 #button:active {
 	color: #09F;
 	font-family: NormalFont, Arial, Helvetica, sans-serif;

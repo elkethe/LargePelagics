@@ -68,7 +68,7 @@ if (isset($_SESSION['sess_username']) && isset($_SESSION['sess_privileges'])) {
                     $("label[for='measurelife_status_" + rowNumber + "'],#measurelife_status_" + rowNumber).show("slow");
                     $("label[for='measurebait_type_" + rowNumber + "'],#measurebait_type_" + rowNumber).show("slow");
                     $("label[for='measurecommercial_" + rowNumber + "'],#measurecommercial_" + rowNumber).show("slow");
-                    $("label[for='measurepfl_" + rowNumber + "'],#measurepfl_" + rowNumber).hide("slow");
+                    $("label[for='measurepfl_" + rowNumber + "'],#measurepfl_" + rowNumber).show("slow");
                 }
                 else if (target.value === "Oilfish")
                 {
@@ -233,7 +233,7 @@ if (isset($_SESSION['sess_username']) && isset($_SESSION['sess_privileges'])) {
                         var AMASRowNum = 1;
                         function addAMASRow(frm) {
                             AMASRowNum++;
-                            var AMASRow = '<p id="AMASrow_' + AMASRowNum + '"> AMAS: <input type="text" name="AMAS[]" size="10" class="amas-'+AMASRowNum+'"/><span class="checker-'+AMASRowNum+'"></span><input onClick="removeAMASRow(' + AMASRowNum + ');" type="button" style="float:right;" value="-" />';
+                            var AMASRow = '<p id="AMASrow_' + AMASRowNum + '"> AMAS: <input type="text" name="AMAS[]" size="10" class="amas-' + AMASRowNum + '"/><span class="checker-' + AMASRowNum + '"></span><input onClick="removeAMASRow(' + AMASRowNum + ');" type="button" style="float:right;" value="-" />';
                             $('#AMASRows').append(AMASRow);
                             document.getElementsByName("amascounter")[0].value = AMASRowNum;
 
@@ -260,9 +260,16 @@ if (isset($_SESSION['sess_username']) && isset($_SESSION['sess_privileges'])) {
                                 var split = cls.split("-");
                                 var rn = split[1];
                                 //alert(amas);
-                                $.post("checkamas.php", {checkamas:amas}, function (data) {
-                                    $(".checker-"+rn+"").html(data);
+                                $.post("checkamas.php", {checkamas: amas}, function (data) {
+                                    $(".checker-" + rn + "").html(data);
+                                    var imgsrc = $(".checker-" + rn + " > img").attr('src');
+                                    if (imgsrc == "img/xi.png" || imgsrc == "") {
+                                        $('.submitbtn').attr('disabled', 'disabled');
+                                    } else {
+                                        $('.submitbtn').removeAttr('disabled');
+                                    }
                                 });
+
                             });
                         });
 
@@ -577,7 +584,7 @@ if (isset($_SESSION['sess_username']) && isset($_SESSION['sess_privileges'])) {
                     <br />
                     <br />
                     <?php
-                    echo' <div class="ifbutton"><input name="submit" type="submit" id="button" value="Submit" onclick="return checkamas()" /> <input name="reset" type="reset" id="button" value="Reset" /></div>
+                    echo' <div class="ifbutton"><input name="submit" type="submit" id="button" value="Submit" class="submitbtn" onclick="return checkamas()" /> <input name="reset" type="reset" id="button" value="Reset" /></div>
 
                   </form>';
                 } else {

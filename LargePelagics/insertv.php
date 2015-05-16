@@ -85,22 +85,24 @@ if (pass==null || pass=="")
                   <table width="100%" border="0" cellspacing="0" cellpadding="0">
                   <tr><th>Gear information</th></tr>
                     <tr><td>Winch type:</td>			<td><input type="text" name="Winch_type"></td></tr>
-                    <tr><td>Year:</td>			<td><input type="text" name="year"></td></tr>
+                    <tr><td>Year:</td>			<td><input type="text" name="gear_year"></td></tr>
+                    <tr><td>LL length:</td>			<td><input type="text" name="ll_length"></td></tr>
                     <tr><td>Float distance:</td>			<td><input type="text" name="float_distance"></td></tr>
                     <tr><td>Branch line distance:</td>			<td><input type="text" name="branch_line_distance"></td></tr>
-                    <tr><td>MLdiameter:</td>			<td><input type="text" name="ml_diameter"></td></tr>
-                    <tr><td>Blddiameter:</td>			<td><input type="text" name="bl_diameter"></td></tr>
-                    <tr><td>BLlength:</td>			<td><input type="text" name="bl_length"></td></tr>
-                    <tr><td>FloatLength:</td>			<td><input type="text" name="float_length"></td></tr>
+                    <tr><td>ML diameter:</td>			<td><input type="text" name="ml_diameter"></td></tr>
+                    <tr><td>BL diameter:</td>			<td><input type="text" name="bl_diameter"></td></tr>
+                    <tr><td>BL length:</td>			<td><input type="text" name="bl_length"></td></tr>
+                    <tr><td>Float Length:</td>			<td><input type="text" name="float_length"></td></tr>
                     <tr><td>Hooks/Set:</td>			<td><input type="text" name="hooks_set"></td></tr>
                     <tr><td>Hooks number:</td>			<td><input type="text" name="hooks_no"></td></tr>
+                    <tr><td>Extras:</td>			<td><input type="text" name="extras"></td></tr>
                     <tr><td>Extra Comments:</td>			<td><input type="textarea"  name="extra_comments"></td></tr>
 					</table>
                    </td>
                    <td width="25%" valign="top">
                   <table width="100%" border="0" cellspacing="0" cellpadding="0">
                   <tr><th>Production Info</th></tr>
-                    <tr><td>Year:</td>			<td><input type="text" name="year"></td></tr>
+                    <tr><td>Year:</td>			<td><input type="text" name="pro_year"></td></tr>
                     <tr><td>SWOproduction:</td>			<td><input type="text" name="SWOproduction"></td></tr>
                     <tr><td>ALBproduction:</td>			<td><input type="text" name="ALBproduction"></td></tr>
                     <tr><td>BFTproduction:</td>			<td><input type="text" name="BFTproduction"></td></tr>

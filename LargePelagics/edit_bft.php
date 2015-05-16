@@ -64,18 +64,18 @@ if (pass==null || pass=="")
     	          <form action="change_bft.php" method="post" >
                   <table width="100%" border="0" cellpadding="0" cellspacing="0">
                   	<tr><th>Change the fields you want and press submit</th></tr>
-                        <tr><td>BFT measure ID:</td>			<td><input type="text" name="BFT_measure_ID" value=" <?php echo $row['BFT_measure_ID'];?>" readonly></td></tr>
-                    <tr><td>Fl:</td> 	<td><input type="text" name="fl" value=" <?php echo $row['fl'];?>"></td></tr>
-                    <tr><td>GG:</td> 	<td><input type="text" name="gg" value=" <?php echo $row['gg'];?>"></td></tr>
-                    <tr><td>DW:</td> 			<td><input type="text" name="dw" value=" <?php echo $row['dw'];?>"></td></tr>
-                    <tr><td>RW:</td>		<td><input type="text" name="rw" value=" <?php echo $row['rw'];?>"></td></tr>
-                    <tr><td>Sex:</td> 			<td><input type="text" name="sex" value=" <?php echo $row['sex'];?>"></td></tr>
-                    <tr><td>Pfl:</td> 			<td><input type="text" name="pfl" value=" <?php echo $row['pfl'];?>"></td></tr>
-                    <tr><td>Mature stage:</td>		<td><input type="text" name="matur_stage" value=" <?php echo $row['matur_stage'];?>"></td></tr>
-                    <tr><td>Gon wei:</td> 			<td><input type="text" name="gon_wei" value=" <?php echo $row['gon_wei'];?>"></td></tr>
-                    <tr><td>Life status:</td>		<td><input type="text" name="life_status" value=" <?php echo $row['life_status'];?>"></td></tr>
-                    <tr><td>Bait type:</td> 			<td><input type="text" name="bait_type" value=" <?php echo $row['bait_type'];?>"></td></tr>
-                    <tr><td>Commercial:</td>		<td><input type="text" name="commercial" value=" <?php echo $row['commercial'];?>"></td></tr>
+                        <tr><td>BFT measure ID:</td>			<td><input type="text" name="BFT_measure_ID" value="<?php echo $row['BFT_measure_ID'];?>" readonly></td></tr>
+                    <tr><td>Fl:</td> 	<td><input type="text" name="fl" value="<?php echo $row['fl'];?>"></td></tr>
+                    <tr><td>GG:</td> 	<td><input type="text" name="gg" value="<?php echo $row['gg'];?>"></td></tr>
+                    <tr><td>DW:</td> 			<td><input type="text" name="dw" value="<?php echo $row['dw'];?>"></td></tr>
+                    <tr><td>RW:</td>		<td><input type="text" name="rw" value="<?php echo $row['rw'];?>"></td></tr>
+                    <tr><td>Sex:</td> 			<td><input type="text" name="sex" value="<?php echo $row['sex'];?>"></td></tr>
+                    <tr><td>Pfl:</td> 			<td><input type="text" name="pfl" value="<?php echo $row['pfl'];?>"></td></tr>
+                    <tr><td>Mature stage:</td>		<td><input type="text" name="matur_stage" value="<?php echo $row['matur_stage'];?>"></td></tr>
+                    <tr><td>Gon wei:</td> 			<td><input type="text" name="gon_wei" value="<?php echo $row['gon_wei'];?>"></td></tr>
+                    <tr><td>Life status:</td>		<td><input type="text" name="life_status" value="<?php echo $row['life_status'];?>"></td></tr>
+                    <tr><td>Bait type:</td> 			<td><input type="text" name="bait_type" value="<?php echo $row['bait_type'];?>"></td></tr>
+                    <tr><td>Commercial:</td>		<td><input type="text" name="commercial" value="<?php echo $row['commercial'];?>"></td></tr>
                     <tr><td><input type="submit" id="button" name="Submit"></td></tr>
                   </table>
 				  </form>
