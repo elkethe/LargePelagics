@@ -19,8 +19,8 @@ else {
 	$usercheck=0;
 	}
 require_once('dbcon.php');
-$counter=$_POST['counter'];
-for($i=0; $i<$counter; $i++){
+//$counter=$_POST['counter'];
+//for($i=0; $i<$counter; $i++){
 $ALB_measure_ID=$_POST['ALB_measure_ID'];
 $fl=$_POST['fl'];
 $gg=$_POST['gg'];
@@ -63,7 +63,7 @@ if (!mysqli_query($con,$query))
   {
   die('Error: ' . mysqli_error($con));
   }
-}
+//}
 echo "<img src=\"img/tick.png\" width=\"25\" height=\"25\" /><strong>ALB measure data  changed succesfully!</strong> <p> You are redirected to homepage... </p><p> <i>if you aren't redirected <a href=\"index.php\">click here</a></i></p>";
 header("refresh:5;url=index.php");
 
