@@ -87,7 +87,7 @@ if (isset($_SESSION['sess_username']) && isset($_SESSION['sess_privileges'])) {
                         while ($row = mysqli_fetch_array($result)) {
                             echo "<tr>";
                             echo "<td>" . $row['action_username'] . "</td>";
-                            echo "<td><a href=\"edit_vessel.php\">" . $row['action_AMAS'] . "</a></td>";
+                            echo "<td><a href=\"edit_vessel.php?amas=" . $row['action_AMAS'] . "\">" . $row['action_AMAS'] . "</a></td>";
                             if (!empty($row['action_pproduction_ID'])) {
                                 echo '<td>' . $row['action_pproduction_ID'] . '-[<a href="edit_production.php?id=' . $row['action_pproduction_ID'] . '">Edit</a>] [<a href="production.php?action=delete&id=' . $row['action_pproduction_ID'] . '">Delete</a>]</td>';
                             } else {
