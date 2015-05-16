@@ -20,7 +20,7 @@ else {
 	}
 require_once('dbcon.php');
 $cname = addslashes($_POST['common_name']);
-$sql="UPDATE ALBmeasure 
+$sql="UPDATE OTHERmeasure 
 		SET 
 		OTHER_measure_ID = '$_POST[OTHER_measure_ID]',
 		species_name = '$_POST[species_name]', 
@@ -35,7 +35,7 @@ $sql="UPDATE ALBmeasure
 		bait_type = '$_POST[bait_type]', 
 		commercial = '$_POST[commercial]'
 		
-	WHERE ALB_measure_ID = '$_POST[ALB_measure_ID]'";
+	WHERE OTHER_measure_ID = '$_POST[OTHER_measure_ID]'";
 
 if (!mysqli_query($con,$sql))
   {
@@ -44,9 +44,9 @@ if (!mysqli_query($con,$sql))
   
   
 
-$query="INSERT INTO users_action_history (action_ID, action_username, action_OTHERmeasure, action_date)
-VALUES
-(NULL, '$usercheck', '$_POST[OTHER_measure_ID]', NOW())";
+$query="UPDATE users_action_history SET
+    action_date = NOW()
+    WHERE action_OTHERmeasure = '$_POST[OTHER_measure_ID]'";
 
 if (!mysqli_query($con,$query))
   {
