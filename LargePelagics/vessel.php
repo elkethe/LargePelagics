@@ -148,7 +148,7 @@
                 $vw = $_POST['vw'];
                 $hp = $_POST['hp'];
                 $navigation = $_POST['navigation'];
-                $communication = $_POST[communication];
+                $communication = $_POST['communication'];
                 $sql = "INSERT INTO vessel (AMAS, vessel_name, reg_no_state, port, port_area, grt, vl, vlc, vw, hp, navigation, communication) VALUES("
                         . "'$amas','$vessel_name','$reg_no_state','$port','$port_area','$grt','$vl','$vlc','$vw','$hp','$navigation','$communication');";
                 return $sql;

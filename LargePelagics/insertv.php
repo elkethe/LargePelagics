@@ -84,7 +84,7 @@ if (pass==null || pass=="")
                   <td width="25%" valign="top">
                   <table width="100%" border="0" cellspacing="0" cellpadding="0">
                   <tr><th>Gear information</th></tr>
-                    <tr><td>Winch type:</td>			<td><input type="text" name="Winch_type"></td></tr>
+                    <tr><td>Winch type:</td>			<td><input type="text" name="winch_type"></td></tr>
                     <tr><td>Year:</td>			<td><input type="text" name="gear_year"></td></tr>
                     <tr><td>LL length:</td>			<td><input type="text" name="ll_length"></td></tr>
                     <tr><td>Float distance:</td>			<td><input type="text" name="float_distance"></td></tr>
