@@ -25,7 +25,7 @@ $old="SELECT * FROM expedition_size WHERE size_expedition_ID = '$id'";
 $oldq=  mysqli_query($con, $old);
 $x=1;
 while($oldrow=mysqli_fetch_array($oldq)){
-    $oldspecies[$x]= $oldrow['species'];
+    $oldspecies[$x]= addslashes($oldrow['species']);
     $x++;
 }
 for($i=1; $i<=$counter; $i++){
@@ -36,6 +36,10 @@ $species=$_POST['species_'.$i];
 $commercial=$_POST['commercial_'.$i];
 $old_species=$oldspecies[$i];
 $uord=$_POST['update_'.$i];
+echo 'species: '. $species;
+echo '<br />';
+echo 'oldspecies: ' . $old_species;
+echo '<br />';
 if($uord=="update"){
 $sql="UPDATE expedition_size
 		SET 

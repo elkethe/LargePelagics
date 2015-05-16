@@ -403,7 +403,7 @@ if (isset($_SESSION['sess_username']) && isset($_SESSION['sess_privileges'])) {
                             $speciesq = mysqli_query($con, $sql);
 
                             while ($row = mysqli_fetch_array($speciesq)) {
-                                echo "<option value=\"" . $row['common'] . "\">" . $row['common'] . "</option>";
+                                echo "<option value=\"" . addslashes($row['common']) . "\">" . $row['common'] . "</option>";
                             }
                             ?> 
                         </select> <br />
@@ -464,11 +464,11 @@ if (isset($_SESSION['sess_username']) && isset($_SESSION['sess_privileges'])) {
                                 $speciesq = mysqli_query($con, $sql);
 
                                 while ($row = mysqli_fetch_array($speciesq)) {
-                                    echo "<option value=\"" . $row['common'] . "\">" . $row['common'] . "</option>";
+                                    echo "<option value=\"" . addslashes($row['common']) . "\">" . $row['common'] . "</option>";
                                 }
                                 ?> 
                             </select>
-                            <label for="measurefl[]">FL:</label>
+                            <label for="measurefl_0">FL:</label>
                             <input type="text" name="measurefl[]" id="measurefl_0" size="4"/>
                             <label for="measureljfl_0">LJFL:</label>
                             <input type="text" name="measureljfl[]" size="4" id="measureljfl_0" />

@@ -40,16 +40,19 @@
             }
             $spcounter = $_POST['speciescounter'];
             for ($i = 0; $i < $spcounter; $i++) {
-                $exp_size_query = expSizeQuery($i, $expid);
-                $error = insertExpSize($con, $exp_size_query);
+                if ($_POST['species'][$i] != NULL) {
+                    $exp_size_query = expSizeQuery($i, $expid);
+                    $error = insertExpSize($con, $exp_size_query);
+                    if ($error) {
+                        die('Execution stopped!' . __LINE__);
+                    }
+                }
+            }if ($_POST['species'][0] != NULL) {
+                $ins_uaction_query = userActionQuery($con, $usercheck, "expedition_size", $expid);
+                $error = insertUsersAction($con, $ins_uaction_query);
                 if ($error) {
                     die('Execution stopped!' . __LINE__);
                 }
-            }
-            $ins_uaction_query = userActionQuery($con, $usercheck, "expedition_size", $expid);
-            $error = insertUsersAction($con, $ins_uaction_query);
-            if ($error) {
-                die('Execution stopped!' . __LINE__);
             }
             $spmcounter = (int) $_POST['speciesmeasurecounter'];
             for ($i = 0; $i < $spmcounter; $i++) {
@@ -130,7 +133,7 @@
                 //header("refresh:3;url=inserted.php");
             } else {
                 echo "<img src=\"img/tick.png\" width=\"25\" height=\"25\" /><strong>Expedition data stored succesfully!</strong> <p> You are redirected to homepage... </p><p> <i>if you aren't redirected <a href=\"index.php\">click here</a></i></p>";
-                header("refresh:3;url=inserted.php");
+                //header("refresh:3;url=inserted.php");
             }
 
             ###########################################
@@ -197,7 +200,7 @@
                 $commercial = $_POST['measurecommercial'];
                 $sql = "INSERT INTO SWOmeasure VALUES ("
                         . "$spmid,$ljfl[$im],$gg[$im],'$sex[$im]',$rw[$im],$dw[$im],$pfl[$im],$head_length[$im],"
-                        . "$matur_stage[$im],$gon_wei[$im],'$parasites[$im]',$life_status[$im]','$bait_type[$im]','$commercial[$im]');";
+                        . "$matur_stage[$im],$gon_wei[$im],'$parasites[$im]','$life_status[$im]','$bait_type[$im]','$commercial[$im]');";
                 return $sql;
             }
 

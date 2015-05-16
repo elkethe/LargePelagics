@@ -19,12 +19,12 @@ else {
 	$usercheck=0;
 	}
 require_once('dbcon.php');
-
+$cname = addslashes($_POST['common_name']);
 $sql="UPDATE ALBmeasure 
 		SET 
 		OTHER_measure_ID = '$_POST[OTHER_measure_ID]',
 		species_name = '$_POST[species_name]', 
-		common_name = '$_POST[common_name]',
+		common_name = '$cname',
 		fl = '$_POST[fl]', 
 		tl = '$_POST[tl]',
 		gg = '$_POST[gg]', 

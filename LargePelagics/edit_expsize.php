@@ -72,7 +72,7 @@ if (pass==null || pass=="")
                     <tr><td>Weight:</td> 	<td><input type="text" name="weight_'.$i.'" value="'.$row['weight'].'"></td></tr>
                     <tr><td>Num:</td> 	<td><input type="text" name="num_'.$i.'" value="'.$row['num'].'"></td></tr>
                     <tr><td>Commercial:</td>    <td><input type="text" name="commercial_'.$i.'" value="'.$row['commercial'].'"></td></tr>
-                    <tr><td>Species:</td> 			<td><input type="text" name="species_'.$i.'" value="'.$row['species'].'"></td></tr>
+                    <tr><td>Species:</td> 			<td><input type="text" name="species_'.$i.'" value="'.addslashes($row['species']).'"></td></tr>
                     <tr><td><input type="hidden" name="counter" value="'. mysqli_num_rows($result) .'" /></td><td><input type="radio" name="update_'.$i.'" value="delete">Delete<br><input type="radio" name="update_'.$i.'" value="update" checked>Update</td></tr>
                     <tr><td><hr /></td><td><hr /></td></tr>';
                   $i++;
