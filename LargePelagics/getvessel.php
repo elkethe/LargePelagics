@@ -4,7 +4,12 @@ session_start();
 header('Content-Type: text/html; charset=UTF-8');
 include ("dbcon.php");
 mysqli_set_charset($con, "utf8");
-$searchv = $_POST['searchv'];
+if(isset($_POST['searchv'])){
+    $searchv = $_POST['searchv'];
+} else if (isset($_POST['pvessel'])){
+    $searchv = $_POST['pvessel'];
+}
+
 if(empty($searchv)) {
 	$sql = "SELECT * FROM vessel";
     } else {
