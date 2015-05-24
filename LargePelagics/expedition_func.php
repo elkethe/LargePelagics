@@ -158,17 +158,37 @@
                 $snamerow = mysqli_fetch_array($resultsciq);
                 $scientificname = $snamerow['scientific'];
 
-                $fl = $_POST['measurefl'];
-                $tl = $_POST['measuretl'];
-                $gg = $_POST['measuregg'];
-                $dw = $_POST['measuredw'];
-                $rw = $_POST['measurerw'];
+                if (empty($_POST['measurefl'][$im])) {
+                    $fl = 0;
+                } else {
+                    $fl = $_POST['measurefl'][$im];
+                }
+                if (empty($_POST['measuretl'][$im])) {
+                    $tl = 0;
+                } else {
+                    $tl = $_POST['measuretl'][$im];
+                }
+                if (empty($_POST['measuregg'][$im])) {
+                    $gg = 0;
+                } else {
+                    $gg = $_POST['measuregg'][$im];
+                }
+                if (empty($_POST['measuredw'][$im])) {
+                    $dw = 0;
+                } else {
+                    $dw = $_POST['measuredw'][$im];
+                }
+                if (empty($_POST['measurerw'][$im])) {
+                    $rw = 0;
+                } else {
+                    $rw = $_POST['measurerw'][$im];
+                }
                 $sex = $_POST['measuresex'];
                 $life_status = $_POST['measurelife_status'];
                 $bait_type = $_POST['measurebait_type'];
                 $commercial = $_POST['measurecommercial'];
                 $sql = "INSERT INTO OTHERmeasure VALUES ("
-                        . "$spmid,'$scientificname','$speciesmeasure',$fl[$im],$tl[$im],$gg[$im],$dw[$im],$rw[$im],"
+                        . "$spmid,'$scientificname','$speciesmeasure',$fl,$tl,$gg,$dw,$rw,"
                         . "'$sex[$im]','$life_status[$im]','$bait_type[$im]','$commercial[$im]');";
                 return $sql;
             }
@@ -185,22 +205,54 @@
             }
 
             function SWOQuery($im, $spmid) {
-                $ljfl = $_POST['measureljfl'];
-                $gg = $_POST['measuregg'];
+                if (empty($_POST['measureljfl'][$im])) {
+                    $ljfl = 0;
+                } else {
+                    $ljfl = $_POST['measureljfl'][$im];
+                }
+                if (empty($_POST['measuregg'][$im])) {
+                    $gg = 0;
+                } else {
+                    $gg = $_POST['measuregg'][$im];
+                }
+                if (empty($_POST['measuredw'][$im])) {
+                    $dw = 0;
+                } else {
+                    $dw = $_POST['measuredw'][$im];
+                }
+                if (empty($_POST['measurerw'][$im])) {
+                    $rw = 0;
+                } else {
+                    $rw = $_POST['measurerw'][$im];
+                }
                 $sex = $_POST['measuresex'];
-                $rw = $_POST['measurerw'];
-                $dw = $_POST['measuredw'];
-                $pfl = $_POST['measurepfl'];
-                $head_length = $_POST['measurehead_length'];
-                $matur_stage = $_POST['measurematur_stage'];
-                $gon_wei = $_POST['measuregon_wei'];
+                if (empty($_POST['measurepfl'][$im])) {
+                    $pfl = 0;
+                } else {
+                    $pfl = $_POST['measurepfl'][$im];
+                }
+                if (empty($_POST['measurehead_length'][$im])) {
+                    $head_length = 0;
+                } else {
+                    $head_length = $_POST['measurehead_length'][$im];
+                }
+                if (empty($_POST['measurematur_stage'][$im])) {
+                    $matur_stage = 0;
+                } else {
+                    $matur_stage = $_POST['measurematur_stage'][$im];
+                }
+                if (empty($_POST['measuregon_wei'][$im])) {
+                    $gon_wei = 0;
+                } else {
+                    $gon_wei = $_POST['measuregon_wei'][$im];
+                }
                 $parasites = $_POST['measureparasites'];
                 $life_status = $_POST['measurelife_status'];
                 $bait_type = $_POST['measurebait_type'];
                 $commercial = $_POST['measurecommercial'];
                 $sql = "INSERT INTO SWOmeasure VALUES ("
-                        . "$spmid,$ljfl[$im],$gg[$im],'$sex[$im]',$rw[$im],$dw[$im],$pfl[$im],$head_length[$im],"
-                        . "$matur_stage[$im],$gon_wei[$im],'$parasites[$im]','$life_status[$im]','$bait_type[$im]','$commercial[$im]');";
+                        . "$spmid,$ljfl,$gg,'$sex[$im]',$rw,$dw,$pfl,$head_length,"
+                        . "$matur_stage,$gon_wei,'$parasites[$im]','$life_status[$im]','$bait_type[$im]','$commercial[$im]');";
                 return $sql;
             }
 
@@ -216,18 +268,42 @@
             }
 
             function RVTQuery($im, $spmid) {
-                $fl = $_POST['measurefl'];
-                $tl = $_POST['measuretl'];
-                $pffl = $_POST['measurpffl'];
-                $gg = $_POST['measuregg'];
-                $dw = $_POST['measuredw'];
-                $rw = $_POST['measurerw'];
+                if (empty($_POST['measurefl'][$im])) {
+                    $fl = 0;
+                } else {
+                    $fl = $_POST['measurefl'][$im];
+                }
+                if (empty($_POST['measuregg'][$im])) {
+                    $gg = 0;
+                } else {
+                    $gg = $_POST['measuregg'][$im];
+                }
+                if (empty($_POST['measuredw'][$im])) {
+                    $dw = 0;
+                } else {
+                    $dw = $_POST['measuredw'][$im];
+                }
+                if (empty($_POST['measurerw'][$im])) {
+                    $rw = 0;
+                } else {
+                    $rw = $_POST['measurerw'][$im];
+                }
+                if (empty($_POST['measuretl'][$im])) {
+                    $tl = 0;
+                } else {
+                    $tl = $_POST['measuretl'][$im];
+                }
+                if (empty($_POST['measurepffl'][$im])) {
+                    $pffl = 0;
+                } else {
+                    $pffl = $_POST['measurepffl'][$im];
+                }
                 $sex = $_POST['measuresex'];
                 $life_status = $_POST['measurelife_status'];
                 $bait_type = $_POST['measurebait_type'];
                 $commercial = $_POST['measurecommercial'];
                 $sql = "INSERT INTO RVTmeasure VALUES ("
-                        . "$spmid,$fl[$im],$tl[$im],$pffl[$im],$dw[$im],$rw[$im],'$sex[$im]',"
+                        . "$spmid,$fl,$tl,$pffl,$dw,$rw,'$sex[$im]',"
                         . "'$life_status[$im]','$bait_type[$im]','$commercial[$im]');";
                 return $sql;
             }
@@ -244,19 +320,47 @@
             }
 
             function BFTQuery($im, $spmid) {
-                $fl = $_POST['measurefl'];
-                $gg = $_POST['measuregg'];
-                $dw = $_POST['measuredw'];
-                $rw = $_POST['measurerw'];
+                if (empty($_POST['measurefl'][$im])) {
+                    $fl = 0;
+                } else {
+                    $fl = $_POST['measurefl'][$im];
+                }
+                if (empty($_POST['measuregg'][$im])) {
+                    $gg = 0;
+                } else {
+                    $gg = $_POST['measuregg'][$im];
+                }
+                if (empty($_POST['measuredw'][$im])) {
+                    $dw = 0;
+                } else {
+                    $dw = $_POST['measuredw'][$im];
+                }
+                if (empty($_POST['measurerw'][$im])) {
+                    $rw = 0;
+                } else {
+                    $rw = $_POST['measurerw'][$im];
+                }
                 $sex = $_POST['measuresex'];
-                $pfl = $_POST['measurepfl'];
-                $matur_stage = $_POST['measurematur_stage'];
-                $gon_wei = $_POST['measuregon_wei'];
+                if (empty($_POST['measurepfl'][$im])) {
+                    $pfl = 0;
+                } else {
+                    $pfl = $_POST['measurepfl'][$im];
+                }
+                if (empty($_POST['measurematur_stage'][$im])) {
+                    $matur_stage = 0;
+                } else {
+                    $matur_stage = $_POST['measurematur_stage'][$im];
+                }
+                if (empty($_POST['measuregon_wei'][$im])) {
+                    $gon_wei = 0;
+                } else {
+                    $gon_wei = $_POST['measuregon_wei'][$im];
+                }
                 $life_status = $_POST['measurelife_status'];
                 $bait_type = $_POST['measurebait_type'];
                 $commercial = $_POST['measurecommercial'];
                 $sql = "INSERT INTO BFTmeasure VALUES ("
-                        . "$spmid,$fl[$im],$gg[$im],$dw[$im],$rw[$im],'$sex[$im]',$pfl[$im],$matur_stage[$im],$gon_wei[$im],"
+                        . "$spmid,$fl,$gg,$dw,$rw,'$sex[$im]',$pfl,$matur_stage,$gon_wei,"
                         . "'$life_status[$im]','$bait_type[$im]','$commercial[$im]');";
                 return $sql;
             }
@@ -273,18 +377,42 @@
             }
 
             function ALBQuery($im, $spmid) {
-                $fl = $_POST['measurefl'];
-                $gg = $_POST['measuregg'];
-                $dw = $_POST['measuredw'];
-                $rw = $_POST['measurerw'];
+                if (empty($_POST['measurefl'][$im])) {
+                    $fl = 0;
+                } else {
+                    $fl = $_POST['measurefl'][$im];
+                }
+                if (empty($_POST['measuregg'][$im])) {
+                    $gg = 0;
+                } else {
+                    $gg = $_POST['measuregg'][$im];
+                }
+                if (empty($_POST['measuredw'][$im])) {
+                    $dw = 0;
+                } else {
+                    $dw = $_POST['measuredw'][$im];
+                }
+                if (empty($_POST['measurerw'][$im])) {
+                    $rw = 0;
+                } else {
+                    $rw = $_POST['measurerw'][$im];
+                }
                 $sex = $_POST['measuresex'];
-                $matur_stage = $_POST['measurematur_stage'];
-                $gon_wei = $_POST['measuregon_wei'];
+                if (empty($_POST['measurematur_stage'][$im])) {
+                    $matur_stage = 0;
+                } else {
+                    $matur_stage = $_POST['measurematur_stage'][$im];
+                }
+                if (empty($_POST['measuregon_wei'][$im])) {
+                    $gon_wei = 0;
+                } else {
+                    $gon_wei = $_POST['measuregon_wei'][$im];
+                }
                 $life_status = $_POST['measurelife_status'];
                 $bait_type = $_POST['measurebait_type'];
                 $commercial = $_POST['measurecommercial'];
                 $sql = "INSERT INTO ALBmeasure VALUES ("
-                        . "$spmid,$fl[$im],$gg[$im],$dw[$im],$rw[$im],'$sex[$im]',$matur_stage[$im],$gon_wei[$im],'$life_status[$im]',"
+                        . "$spmid,$fl,$gg,$dw,$rw,'$sex[$im]',$matur_stage,$gon_wei,'$life_status[$im]',"
                         . "'$bait_type[$im]','$commercial[$im]');";
                 return $sql;
             }
