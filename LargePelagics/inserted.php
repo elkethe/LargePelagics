@@ -325,9 +325,10 @@ if (isset($_SESSION['sess_username']) && isset($_SESSION['sess_privileges'])) {
             <td>Light sticks:</td>
             <td>
 				<select name="lightsticks">
-  					<option value="">Select...</option>
-  					<option value="1">YES</option>
- 					 <option value="0">NO</option>
+			          <option value="">Select...</option>
+	                  <option value="1">YES</option>
+                      <option value="0">NO</option>
+                      <option value="U">Unknown</option>
 				</select>
 			</td>
           </tr>
@@ -412,11 +413,11 @@ if (isset($_SESSION['sess_username']) && isset($_SESSION['sess_privileges'])) {
                             while ($row = mysqli_fetch_array($speciesq)) {
                                 echo "<option value=\"" . addslashes($row['common']) . "\">" . $row['common'] . "</option>";
                             }
-                            ?> 
+                            ?>
                         </select> <br />
                         Number: <input type="number" name="speciesnumber[]" size="4" /><br />
                         Weight: <input type="number" name="speciesweight[]" size="4" /><br />
-                        Commercial: <select name="commercial[]"> 
+                        Commercial: <select name="commercial[]">
                             <option value="y">Yes</option>
                             <option value="n">No</option>
                         </select>
@@ -473,7 +474,7 @@ if (isset($_SESSION['sess_username']) && isset($_SESSION['sess_privileges'])) {
                                 while ($row = mysqli_fetch_array($speciesq)) {
                                     echo "<option value=\"" . addslashes($row['common']) . "\">" . $row['common'] . "</option>";
                                 }
-                                ?> 
+                                ?>
                             </select>
                             <label for="measurefl_0">FL:</label>
                             <input type="text" name="measurefl[]" id="measurefl_0" size="4"/>
@@ -482,19 +483,19 @@ if (isset($_SESSION['sess_username']) && isset($_SESSION['sess_privileges'])) {
                             <label for="measuretl_0">TL:</label>
                             <input type="text" name="measuretl[]" size="4" id="measuretl_0"/>
                             <label for="measurepffl_0">PFFL:</label>
-                            <input type="text" name="measurepffl[]" size="4" id="measurepffl_0" /> 
+                            <input type="text" name="measurepffl[]" size="4" id="measurepffl_0" />
                             <label for="measuregg_0">GG:</label>
-                            <input type="text" name="measuregg[]" size="4" id="measuregg_0" /> 
+                            <input type="text" name="measuregg[]" size="4" id="measuregg_0" />
                             <label for="measuredw_0">DW:</label>
-                            <input type="text" name="measuredw[]" size="4" id="measuredw_0" /> 
+                            <input type="text" name="measuredw[]" size="4" id="measuredw_0" />
                             <label for="measurerw_0">RW:</label>
-                            <input type="text" name="measurerw[]" size="4" id="measurerw_0" /> 
+                            <input type="text" name="measurerw[]" size="4" id="measurerw_0" />
                             <label for="measuresex_0">SEX:</label>
                             <select name="measuresex[]" id="measuresex_0">
                                 <option value="Unknown">Unknown</option>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
-                            </select> 
+                            </select>
                             <label for="measurepfl_0">PFL:</label>
                             <input type="text" name="measurepfl[]" size="4" id="measurepfl_0" />
                             <label for="measurematur_stage_0">Mature Stage:</label>

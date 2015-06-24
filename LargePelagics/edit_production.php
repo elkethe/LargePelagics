@@ -49,7 +49,7 @@ if (isset($_SESSION['sess_username']) && isset($_SESSION['sess_privileges'])) {
                     ?></div>
 
 
-                <div id="content"> 
+                <div id="content">
 
                     <h2>Insert/Edit Production</h2>
                     <form action="production.php" method="post" >
@@ -57,7 +57,7 @@ if (isset($_SESSION['sess_username']) && isset($_SESSION['sess_privileges'])) {
                         require_once("dbcon.php");
                         if (!empty($_GET["takeamas"]) && empty($_GET['id'])) {
                             $amas = $_GET["takeamas"];
-                            $sql = "SELECT production.production_ID,production.year FROM production INNER JOIN production_id ON production.production_ID = production_id.production_ID WHERE production_id.AMAS='$amas';";
+                            $sql = "SELECT production.production_ID,production.year FROM production INNER JOIN production_ID ON production.production_ID = production_ID.production_ID WHERE production_ID.AMAS='$amas';";
                             $res = mysqli_query($con, $sql);
                             if (!$res) {
                                 die('error: ' . mysqli_error($con));
@@ -87,9 +87,9 @@ if (isset($_SESSION['sess_username']) && isset($_SESSION['sess_privileges'])) {
                    </td>
                    </table>';
                         } else if (!empty($_GET["id"])) {
-                            
+
                             $id = $_GET["id"];
-                            $pidq = "SELECT AMAS FROM production_id WHERE production_ID='$id'";
+                            $pidq = "SELECT AMAS FROM production_ID WHERE production_ID='$id'";
                             $rpidq = mysqli_query($con, $pidq);
                             $amas = mysqli_fetch_array($rpidq)['AMAS'];
                             $prodq = "SELECT * FROM production WHERE production_ID='$id'";
