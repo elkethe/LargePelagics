@@ -328,7 +328,7 @@ if (isset($_SESSION['sess_username']) && isset($_SESSION['sess_privileges'])) {
 			          <option value="">Select...</option>
 	                  <option value="1">YES</option>
                       <option value="0">NO</option>
-                      <option value="U">Unknown</option>
+                      <option value="U">UNKNOWN</option>
 				</select>
 			</td>
           </tr>
