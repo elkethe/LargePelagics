@@ -415,8 +415,8 @@ if (isset($_SESSION['sess_username']) && isset($_SESSION['sess_privileges'])) {
                             }
                             ?>
                         </select> <br />
-                        Number: <input type="number" name="speciesnumber[]" size="4" /><br />
-                        Weight: <input type="number" name="speciesweight[]" size="4" /><br />
+                        Number: <input type="text" name="speciesnumber[]" size="4" /><br />
+                        Weight: <input type="text" name="speciesweight[]" size="4" /><br />
                         Commercial: <select name="commercial[]">
                             <option value="y">Yes</option>
                             <option value="n">No</option>

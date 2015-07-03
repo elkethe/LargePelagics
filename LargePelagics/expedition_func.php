@@ -452,11 +452,20 @@
 
             function expSizeQuery($counter, $id) {
                 $spweight = $_POST['speciesweight'];
-                $spnumber = $_POST['speciesnumber'];
+                if(empty($spweight[$counter])){
+                    $spweight = "NA";
+                } else {
+                    $spweight = $spweight[$counter];
+                }
+                if(empty($spnumber[$counter])){
+                    $spnumber = "NA";
+                } else {
+                    $spnumber = $spnumber[$counter];
+                }
                 $species = $_POST['species'];
                 $commercial = $_POST['commercial'];
                 $sql = "INSERT INTO expedition_size VALUES ("
-                        . "$spweight[$counter],$spnumber[$counter],'$species[$counter]',$id,'$commercial[$counter]');";
+                        . "'$spweight','$spnumber','$species[$counter]',$id,'$commercial[$counter]');";
                 return $sql;
             }
 
