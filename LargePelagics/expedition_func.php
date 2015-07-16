@@ -303,7 +303,7 @@
                 $bait_type = $_POST['measurebait_type'];
                 $commercial = $_POST['measurecommercial'];
                 $sql = "INSERT INTO RVTmeasure VALUES ("
-                        . "$spmid,$fl,$tl,$pffl,$dw,$rw,'$sex[$im]',"
+                        . "$spmid,$fl,$tl,$pffl,$gg,$dw,$rw,'$sex[$im]',"
                         . "'$life_status[$im]','$bait_type[$im]','$commercial[$im]');";
                 return $sql;
             }

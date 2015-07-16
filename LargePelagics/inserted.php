@@ -12,6 +12,42 @@ if (isset($_SESSION['sess_username']) && isset($_SESSION['sess_privileges'])) {
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
 
+        <script type="text/javascript">
+
+            var ctrlkey = false;
+            var spacekey = false;
+
+            window.onkeydown = function(e) {
+                var key = e.keyCode ? e.keyCode : e.which;
+                if (key == 17) {
+                    ctrlkey = true;
+                    console.log("ctrlkey");
+                }
+
+                if (key == 32) {
+                    spacekey = true;
+                    console.log("spacekey");
+                }
+
+                if(ctrlkey == true && spacekey == true){
+                    var form = document.getElementById('insertform');
+                    addMeasureRow(form);
+                }
+            }
+
+            window.onkeyup = function(e) {
+                var key = e.keyCode ? e.keyCode : e.which;
+                if (key == 17) {
+                    ctrlkey = false;
+                }
+
+                if (key == 32) {
+                    spacekey = false;
+                }
+            }
+
+        </script>
+
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>Large Pelagic Database</title>
         <link href="style.css" rel="stylesheet" type="text/css" />
