@@ -452,6 +452,7 @@
 
             function expSizeQuery($counter, $id) {
                 $spweight = $_POST['speciesweight'];
+                $spnumber = $_POST['speciesnumber'];
                 if(empty($spweight[$counter])){
                     $spweight = "NA";
                 } else {
@@ -602,7 +603,7 @@
                 $endsettime = $_POST['endsettime'];
                 $starthaultime = $_POST['starthaultime'];
                 $endhaultime = $_POST['endhaultime'];
-                $lightsticks = (int) $_POST['lightsticks'];
+                $lightsticks = $_POST['lightsticks'];
                 $infoorigin = $_POST['infoorigin'];
                 $comments = htmlspecialchars($_POST['comments'], ENT_QUOTES);
                 if ($comments == "comments") {
@@ -614,7 +615,7 @@
                         . "'$startlat','$startlon','$endsettime','$endlat','$endlon',"
                         . "'$starthaultime','$startlathaul','$startlonhaul',"
                         . "'$endhaultime','$endlathaul','$endlonhaul',"
-                        . "$lightsticks,'$infoorigin','$comments');";
+                        . "'$lightsticks','$infoorigin','$comments');";
                 return $sql;
             }
 

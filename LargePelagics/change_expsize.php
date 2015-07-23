@@ -8,7 +8,7 @@
 <div id="redirect">
 <?php
 
-session_start(); 
+session_start();
 if(isset($_SESSION['sess_username']) && isset($_SESSION['sess_privileges']))
 {
 $usercheck = $_SESSION['sess_username'];
@@ -36,19 +36,19 @@ $species=$_POST['species_'.$i];
 $commercial=$_POST['commercial_'.$i];
 $old_species=$oldspecies[$i];
 $uord=$_POST['update_'.$i];
-echo 'species: '. $species;
-echo '<br />';
-echo 'oldspecies: ' . $old_species;
-echo '<br />';
+// echo 'species: '. $species;
+// echo '<br />';
+// echo 'oldspecies: ' . $old_species;
+// echo '<br />';
 if($uord=="update"){
 $sql="UPDATE expedition_size
-		SET 
+		SET
 		size_expedition_ID = '$size_expedition_ID',
-		weight = '$weight', 
-		num = '$num', 
+		weight = '$weight',
+		num = '$num',
 		species = '$species',
                 commercial = '$commercial'
-		
+
 	WHERE species='$old_species' AND size_expedition_ID = '$size_expedition_ID'";
 
 if (!mysqli_query($con,$sql))
@@ -62,15 +62,15 @@ if (!mysqli_query($con,$sql))
   {
   die($i . 'Error: ' . mysqli_error($con));
   }
-  $query = "DELETE FROM users_action_history WHERE action_size_expedition_ID = '$size_expedition_ID'";
-  if (!mysqli_query($con,$query))
+  $sql = "DELETE FROM users_action_history WHERE action_size_expedition_ID = '$size_expedition_ID'";
+  if (!mysqli_query($con,$sql))
   {
   die('Error: ' . mysqli_error($con));
   }
 }
-}  
+}
 
-if (!mysqli_query($con,$query))
+if (!mysqli_query($con,$sql))
   {
   die('Error: ' . mysqli_error($con));
   }
@@ -78,7 +78,7 @@ if (!mysqli_query($con,$query))
 {
   echo "<img src=\"img/tick.png\" width=\"25\" height=\"25\" /><strong>Expedition size data  changed succesfully!</strong> <p> You are redirected to homepage... </p><p> <i>if you aren't redirected <a href=\"index.php\">click here</a></i></p>";
 //header("refresh:5;url=index.php");
-} 
+}
 
 
 mysqli_close($con);
